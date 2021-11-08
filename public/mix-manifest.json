@@ -1,6 +1,10 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
+    "/css/style.css": "/css/style.css",
+    "/js/common.js": "/js/common.js",
+    "/js/sweetalert2.js": "/js/sweetalert2.js",
+    "/js/menu.js": "/js/menu.js",
     "/adminlte3-1-0/.babelrc.js": "/adminlte3-1-0/.babelrc.js",
     "/adminlte3-1-0/.browserslistrc": "/adminlte3-1-0/.browserslistrc",
     "/adminlte3-1-0/.bundlewatch.config.json": "/adminlte3-1-0/.bundlewatch.config.json",

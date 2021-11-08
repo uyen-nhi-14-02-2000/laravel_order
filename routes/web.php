@@ -17,12 +17,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware(['auth'])->group(function() {
+Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('home');
-    Route::prefix('order')->name('order.')->group(function() {
-        Route::get('/', 'OrderController@index')->name('index');
+    Route::prefix('menu')->name('menu.')->group(function () {
+        Route::get('/', 'MenuController@index')->name('index');
+        Route::post('/search', 'MenuController@search')->name('search');
+        Route::post('/detail/{id}', 'MenuController@detail')->name('detail');
     });
 });
 
@@ -30,4 +32,4 @@ Route::middleware(['auth'])->group(function() {
 
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
