@@ -1,5 +1,5 @@
 (function ($) {
-    let Menu = function () {};
+    let Menu = function () { };
     jQuery.Menu = new Menu();
     jQuery.extend(Menu.prototype, {
         showModal: function (
@@ -12,20 +12,19 @@
                 method,
                 data,
                 null,
-                jQuery.Menu.showModalCallback
+                jQuery.Menu.showModalCallback,
                 // jQuery.Menu.showModalCallbackError
             );
         },
 
         showModalCallback: function (res) {
-            console.log(res.data.view);
             if (res.data.status) {
                 $("#menu-page #modal-box").html("");
                 $("#menu-page #modal-box").html(res.data.view);
-                $("#menu-page #modal-form").modal({
-                    backdrop: "static",
-                    keyboard: false,
-                });
+                // $("#menu-page #modal-form").modal({
+                //     backdrop: "static",
+                //     keyboard: false,
+                // });
                 $("#menu-page #modal-form").modal("show");
             }
         },
@@ -108,8 +107,8 @@
                     .parent()
                     .append(
                         "<span class='text-danger error-mes'>" +
-                            value +
-                            "</span>"
+                        value +
+                        "</span>"
                     );
             });
         },
@@ -191,6 +190,84 @@
                 jQuery.Menu.getDataTable();
             }
         },
+
+        addCart: function (
+            data = {},
+            url = "cart/add",
+            method = "get"
+        ) {
+            izanagi(
+                url,
+                method,
+                data,
+                null,
+                jQuery.Menu.addCartCallback,
+                jQuery.Menu.addCartCallbackError
+            );
+        },
+
+        getCart: function (
+            data = {},
+            url = "cart",
+            method = "get"
+        ) {
+            izanagi(
+                url,
+                method,
+                data,
+                null,
+                jQuery.Menu.getCartCallback
+                // jQuery.Menu.showModalCallbackError
+            );
+        },
+
+        addCartCallback: function (res) {
+            if(res.data.status) {
+                swalAlert(res.data.icon, res.data.title, res.data.message);
+                jQuery.Menu.getCart();
+            }
+        },
+
+        addCartCallbackError: function (err) {
+            console.log(err);
+
+            if (err.status == 404) {
+                swalAlert(err.data.icon, err.data.title, err.data.message);
+                jQuery.Menu.getDataTable();
+            }
+        },
+
+        getCartCallback: function (res) {
+            if (res.data.status) {
+                let myCart = $(".my-cart");
+                let listProductInCart = $(".list-product-in-cart");
+                let qtyProduct = $(".qty-product-in-cart");
+
+                qtyProduct.html(Object.keys(res.data.cart.product).length);
+
+                let html = '';
+                $.each(res.data.cart.product, function (key, value) {
+                    // alert(value.tenmon);
+                    html += `
+                        <a href="#" class="dropdown-item cart-item">
+                            <!-- Message Start -->
+                            <div class="media">
+                                <img src="` + value.anh + `"
+                                    alt="Image product" class="img-size-50 mr-3 img-circle">
+                                <div class="media-body">
+                                    <h3 class="dropdown-item-title text-wrap">` + value.tenmon + `</h3>
+                                    <p class="text-sm">Số lượng: ` + value.qty + `</p>
+                                    <p class="text-sm text-muted"><i class="fas fa-dollar-sign"></i> Giá: ` + value.gia + ` VND</p>
+                                </div>
+                            </div>
+                            <!-- Message End -->
+                        </a>
+                        <div class="dropdown-divider"></div>`;
+                });
+                html += `<a href="#" class="dropdown-item dropdown-footer">Tới trang thanh toán</a>`;
+                listProductInCart.html(html);
+            }
+        },
     });
 })(jQuery);
 
@@ -214,39 +291,6 @@ $("document").ready(function () {
             jQuery.Menu.searchData(data);
         });
 
-        // $layoutList.on("click", "#button-add", function () {
-        //     // e.preventDefault();
-        //     data = {};
-        //     let url = "dashboard/menus/create";
-        //     let method = "get";
-        //     jQuery.Menu.showModal();
-        // });
-
-        // $modalBox.on("click", "#button-store", function () {
-        //     let data = jQuery.Menu.getParams($("#form-save"));
-        //     let url = "dashboard/menus/store";
-        //     let method = "post";
-        //     jQuery.Menu.submitData(data, url, method);
-        // });
-
-        // $modalBox.on("click", "#button-update", function () {
-        //     let page =
-        //         Number(
-        //             $(".page-item.active").find(".page-link").attr("data-page")
-        //         ) || 1;
-
-        //     let data = jQuery.Menu.getParams(
-        //         $("#form-save"),
-        //         jQuery.Menu.getParams($("#form-search"), {
-        //             page: page,
-        //         })
-        //     );
-
-        //     let url = "dashboard/menus/update/" + data.id;
-        //     let method = "post";
-        //     jQuery.Menu.submitData(data, url, method);
-        // });
-
         $layoutList.on("click", ".product-detail", function () {
             let data = {};
             let id = $(this).parent().parent().attr("data-key");
@@ -269,35 +313,45 @@ $("document").ready(function () {
             jQuery.Menu.showModal(data, url, method);
         });
 
-        // $layoutList.on("click", ".button-edit", function () {
-        //     let data = {};
-        //     let id = $(this).parent().parent().attr("data-key");
-        //     if (id == null || id == "" || id == "undefined") {
-        //         return;
-        //     }
-        //     let url = "dashboard/menus/edit/" + id;
-        //     let method = "get";
-        //     jQuery.Menu.showModal(data, url, method);
-        // });
 
-        // $layoutList.on("click", ".button-delete", function () {
-        //     // let data = {};
-        //     let id = $(this).parent().parent().attr("data-key");
-        //     if (id == null || id == "" || id == "undefined") {
-        //         return;
-        //     }
+        //Modal box
+        $modalBox.on("click", ".increase-qty", function () {
+            let qty = $(this).parent().siblings("input").val();
+            if ($.isNumeric(qty)) {
+                $(this).parent().siblings("input").val(parseInt(qty) + 1);
+            } else {
+                $(this).parent().siblings("input").val(1);
+            }
+        });
 
-        //     let page =
-        //         Number(
-        //             $(".page-item.active").find(".page-link").attr("data-page")
-        //         ) || 1;
+        $modalBox.on("click", ".decrease-qty", function () {
+            let qty = $(this).parent().siblings("input").val();
+            if ($.isNumeric(qty) && parseInt(qty) > 1) {
+                $(this).parent().siblings("input").val(parseInt(qty) - 1);
+            } else {
+                $(this).parent().siblings("input").val(1);
+            }
+        });
 
-        //     let data = jQuery.Menu.getParams($("#form-search"), {
-        //         page: page,
-        //         id: id,
-        //     });
-        //     jQuery.Menu.deleteConfirm(data);
-        // });
+        $modalBox.on("keyup", "input[name='qty']", function () {
+            let qty = $(this).val();
+            if (!$.isNumeric(qty) || parseInt(qty) < 1) {
+                alert("Vui lòng nhập số!");
+                $(this).val(1);
+            }
+        });
+
+        $modalBox.on("click", "#add-cart", function () {
+            let qty = $(this).siblings(".qty-product").children("input").val();
+            let id = $("input[name='id-product']").val();
+            let data = { id: id, qty: qty };
+
+            let url = "cart/add";
+            let method = "post";
+            $("#menu-page #modal-form").modal("toggle");
+            jQuery.Menu.addCart(data, url, method);
+        });
+
     } catch (e) {
         console.log(e);
         alert("The engine can't understand this code, it's invalid");

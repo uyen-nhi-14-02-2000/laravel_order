@@ -12,16 +12,19 @@
                     <img src="{{ $data->anh }}" style="height: 100%" alt="">
                 </div>
                 <div class="description">{{ $data->mota }}</div>
-                <form id="form-save" action="" method="post">
+                <form id="form-product" action="#" method="post">
+                    <input type="hidden" name="id-product" value="{{ $data->id }}">
                 </form>
             </div>
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal">{{ __('Đóng') }}</button>
-                <div class="d-flex">
-                    <input type="text" class="form-control mr-2" value="1" style="width: 50px; text-align: center;">
-                    <button type="button" id="{{ $data == null ? 'button-store' : 'button-update' }}"
-                        class="btn btn-primary">{{ __('Thêm vào giỏ hàng') }}</button>
+                <div class="qty-product d-flex align-items-center">
+                    <span><i class="fas fa-minus-circle decrease-qty"></i></span>
+                    <input name="qty" type="text" class="form-control m-2" value="1">
+                    <span><i class="fas fa-plus-circle increase-qty"></i></span>
                 </div>
+                <button type="button" id="add-cart"
+                    class="btn btn-primary">{{ __('Thêm vào giỏ hàng') }}</button>
             </div>
         </div>
         <!-- /.modal-content -->

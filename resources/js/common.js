@@ -44,6 +44,8 @@ function izanagi(_action, _method, _data, _params, _callback, _callbackError) {
 
     if (typeof _params === "object") {
         options.params = _params;
+    } else {
+        options.params = qs.stringify(_params);
     }
 
     axios(options)

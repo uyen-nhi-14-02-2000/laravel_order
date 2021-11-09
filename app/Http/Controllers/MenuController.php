@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Menu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class MenuController extends Controller
 {
@@ -18,9 +19,8 @@ class MenuController extends Controller
         $this->pageCustom = config('constant')['pageCustom'];
     }
 
-    public function index()
+    public function index(Request $request)
     {
-
         $this->data = $this->model->search($this->pageCustom, $this->sort);
         return view('menu.index', ['data' => $this->data]);
     }

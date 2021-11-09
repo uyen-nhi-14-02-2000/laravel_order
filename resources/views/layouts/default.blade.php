@@ -86,13 +86,13 @@
                 </li>
 
                 <!-- Messages Dropdown Menu -->
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown my-cart">
                     <a class="nav-link" data-toggle="dropdown" href="#">
                         <i class="fas fa-shopping-bag"></i>
-                        <span class="badge badge-danger navbar-badge">3</span>
+                        <span class="badge badge-danger navbar-badge qty-product-in-cart">0</span>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <a href="#" class="dropdown-item">
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right list-product-in-cart">
+                        <a href="#" class="dropdown-item cart-item">
                             <!-- Message Start -->
                             <div class="media">
                                 <img src="https://beptruong.edu.vn/wp-content/uploads/2014/06/bun-ca-ha-noi.jpg"
@@ -101,6 +101,7 @@
                                     <h3 class="dropdown-item-title text-wrap">
                                         Bún mắm
                                     </h3>
+                                    {{-- <span class="float-right text-muted text-sm"><i class="fas fa-trash-alt"></i></span> --}}
                                     <p class="text-sm">Số lượng: 1</p>
                                     <p class="text-sm text-muted"><i class="fas fa-dollar-sign"></i> Giá: 59000 VND</p>
                                 </div>
@@ -108,40 +109,7 @@
                             <!-- Message End -->
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="https://ameovat.com/wp-content/uploads/2016/05/cach-lam-ga-ran.jpg"
-                                    alt="User Avatar" class="img-size-50 img-circle mr-3">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title text-wrap">
-                                        gà
-                                    </h3>
-                                    <p class="text-sm">Số lượng: 2</p>
-                                    <p class="text-sm text-muted"><i class="fas fa-dollar-sign"></i> Giá: 59000 VND</p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="https://images.foody.vn/res/g81/800131/s120x120/9648abd8-5e4a-4127-ad97-f7afc369273f.jpg"
-                                    alt="User Avatar" class="img-size-50 img-circle mr-3">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title text-wrap">
-                                        Full xúc xích - Hotdog Hàn Quốc
-                                        {{-- <span class="float-right text-sm text-warning"><i
-                                                class="fas fa-star"></i></span> --}}
-                                    </h3>
-                                    <p class="text-sm">Số lượng: 1</p>
-                                    <p class="text-sm text-muted"><i class="fas fa-dollar-sign"></i> Giá: 59000 VND</p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>
+                        
                         <a href="#" class="dropdown-item dropdown-footer">Tới trang thanh toán</a>
                     </div>
                 </li>

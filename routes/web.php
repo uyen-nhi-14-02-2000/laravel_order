@@ -26,6 +26,12 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/search', 'MenuController@search')->name('search');
         Route::post('/detail/{id}', 'MenuController@detail')->name('detail');
     });
+    Route::prefix('cart')->name('cart.')->group(function () {
+        // Route::get('/', 'CartController@index')->name('index');
+        // Route::post('/search', 'MenuController@search')->name('search');
+        Route::get('/', 'CartController@index')->name('index');
+        Route::post('/add', 'CartController@add')->name('add');
+    });
 });
 
 
