@@ -30,7 +30,7 @@ CREATE TABLE `donhang` (
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `donhang` (
 
 LOCK TABLES `donhang` WRITE;
 /*!40000 ALTER TABLE `donhang` DISABLE KEYS */;
-INSERT INTO `donhang` VALUES (12,'Lương Bảo','Hồ Chí Minh',1,'2021-11-10 11:10:45','2021-11-10 11:10:45');
+INSERT INTO `donhang` VALUES (12,'Lương Bảo','Hồ Chí Minh',1,'2021-11-10 11:10:45','2021-11-10 11:10:45'),(13,'Admin','Hồ Chí Minh',8,'2021-11-10 14:48:47','2021-11-10 14:48:47'),(14,'Lương Trần Gia Bảo','Hồ Chí Minh',1,'2021-11-10 15:54:50','2021-11-10 15:54:50');
 /*!40000 ALTER TABLE `donhang` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-10 18:12:08
+-- Dump completed on 2021-11-10 23:16:48

@@ -1,5 +1,5 @@
 (function ($) {
-    let Menu = function () { };
+    let Menu = function () {};
     jQuery.Menu = new Menu();
     jQuery.extend(Menu.prototype, {
         showModal: function (
@@ -12,7 +12,7 @@
                 method,
                 data,
                 null,
-                jQuery.Menu.showModalCallback,
+                jQuery.Menu.showModalCallback
                 // jQuery.Menu.showModalCallbackError
             );
         },
@@ -123,11 +123,7 @@
             $("#brandSearch").trigger("change");
         },
 
-        searchData: function (
-            data = {},
-            url = "menu/search",
-            method = "post"
-        ) {
+        searchData: function (data = {}, url = "menu/search", method = "post") {
             izanagi(
                 url,
                 method,
@@ -154,11 +150,7 @@
             }
         },
 
-        addCart: function (
-            data = {},
-            url = "cart/add",
-            method = "get"
-        ) {
+        addCart: function (data = {}, url = "cart/add", method = "get") {
             izanagi(
                 url,
                 method,
@@ -170,7 +162,7 @@
         },
 
         addCartCallback: function (res) {
-            if(res.data.status) {
+            if (res.data.status) {
                 swalAlert(res.data.icon, res.data.title, res.data.message);
                 jQuery.Menu.getCart();
             }
@@ -185,32 +177,18 @@
             }
         },
 
-        removeCart: function (
-            data = {},
-            url = "cart/remove",
-            method = "get"
-        ) {
-            izanagi(
-                url,
-                method,
-                data,
-                null,
-                jQuery.Menu.removeCartCallback
-            );
+        removeCart: function (data = {}, url = "cart/remove", method = "get") {
+            izanagi(url, method, data, null, jQuery.Menu.removeCartCallback);
         },
 
         removeCartCallback: function (res) {
-            if(res.data.status) {
+            if (res.data.status) {
                 swalAlert(res.data.icon, res.data.title, res.data.message);
                 jQuery.Menu.getCart();
             }
         },
 
-        getCart: function (
-            data = {},
-            url = "cart",
-            method = "get"
-        ) {
+        getCart: function (data = {}, url = "cart", method = "get") {
             izanagi(
                 url,
                 method,
@@ -227,29 +205,48 @@
                 let listProductInCart = $(".list-product-in-cart");
                 let qtyProduct = $(".qty-product-in-cart");
 
+                let protocol = window.location.protocol;
+                let hostname = window.location.hostname;
+
+                let url = protocol + "//" + hostname + "/order";
+
                 // console.log(res.data);
                 qtyProduct.html(Object.keys(res.data.cart).length);
 
-                let html = '';
+                let html = "";
                 $.each(res.data.cart, function (key, value) {
                     // alert(value.tenmon);
-                    html += `
-                        <a href="#" class="dropdown-item cart-item" data-id="` + value.id + `">
+                    html +=
+                        `
+                        <a href="#" class="dropdown-item cart-item" data-id="` +
+                        value.id +
+                        `">
                             <!-- Message Start -->
                             <div class="media">
-                                <img src="` + value.anh + `"
+                                <img src="` +
+                        value.anh +
+                        `"
                                     alt="Image product" class="img-size-50 mr-3 img-circle">
                                 <div class="media-body">
-                                    <h3 class="dropdown-item-title text-wrap">` + value.tenmon + `</h3>
-                                    <p class="text-sm">Số lượng: ` + value.qty + `</p>
-                                    <p class="text-sm text-muted"><i class="fas fa-dollar-sign"></i> Giá: ` + value.gia + ` VND</p>
+                                    <h3 class="dropdown-item-title text-wrap">` +
+                        value.tenmon +
+                        `</h3>
+                                    <p class="text-sm">Số lượng: ` +
+                        value.qty +
+                        `</p>
+                                    <p class="text-sm text-muted"><i class="fas fa-dollar-sign"></i> Giá: ` +
+                        value.gia +
+                        ` VND</p>
                                 </div>
                             </div>
                             <!-- Message End -->
                         </a>
                         <div class="dropdown-divider"></div>`;
                 });
-                html += `<a href="#" class="dropdown-item dropdown-footer">Tới trang thanh toán</a>`;
+                html +=
+                    `<a href="` +
+                    url +
+                    `" class="dropdown-item dropdown-footer">Tới trang giỏ hàng</a>`;
                 listProductInCart.html(html);
             }
         },
@@ -263,7 +260,6 @@ $("document").ready(function () {
         let $modalBox = $("#menu-page #modal-box");
         let $myCart = $(".my-cart");
         let $pagination = $("#menu-page .pagination-custom");
-
 
         //clear search form
         $layoutSearch.on("click", ".button-clear", function () {
@@ -305,14 +301,16 @@ $("document").ready(function () {
             jQuery.Menu.showModal(data, url, method);
         });
 
-
         //Modal box
 
         //Increase quantity
         $modalBox.on("click", ".increase-qty", function () {
             let qty = $(this).parent().siblings("input").val();
             if ($.isNumeric(qty)) {
-                $(this).parent().siblings("input").val(parseInt(qty) + 1);
+                $(this)
+                    .parent()
+                    .siblings("input")
+                    .val(parseInt(qty) + 1);
             } else {
                 $(this).parent().siblings("input").val(1);
             }
@@ -322,7 +320,10 @@ $("document").ready(function () {
         $modalBox.on("click", ".decrease-qty", function () {
             let qty = $(this).parent().siblings("input").val();
             if ($.isNumeric(qty) && parseInt(qty) > 1) {
-                $(this).parent().siblings("input").val(parseInt(qty) - 1);
+                $(this)
+                    .parent()
+                    .siblings("input")
+                    .val(parseInt(qty) - 1);
             } else {
                 $(this).parent().siblings("input").val(1);
             }
@@ -350,9 +351,8 @@ $("document").ready(function () {
         });
 
         //Remove product in cart
-        $myCart.on("click", ".cart-item", function() {
-
-            let id = $(this).data('id');
+        $myCart.on("click", ".cart-item", function () {
+            let id = $(this).data("id");
             let data = { id: id, isDelAll: false };
 
             let url = "cart/remove";
@@ -374,7 +374,6 @@ $("document").ready(function () {
             });
             jQuery.Menu.searchData(data);
         });
-
     } catch (e) {
         console.log(e);
         alert("The engine can't understand this code, it's invalid");

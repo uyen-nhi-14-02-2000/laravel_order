@@ -11,19 +11,19 @@
                 <table class="table">
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Tên món ăn</th>
-                            <th scope="col">Giá tiền</th>
-                            <th scope="col">Số lượng đặt</th>
+                            <th scope="col" class="text-center">#</th>
+                            <th scope="col" class="text-center">Tên món ăn</th>
+                            <th scope="col" class="text-center">Giá tiền</th>
+                            <th scope="col" class="text-center">Số lượng đặt</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($data as $item)
                             <tr>
-                                <th scope="row">{{ $item->mamonan }}</th>
-                                <td>{{ $item->tenmonan }}</td>
-                                <td>{{ $item->giatien }}</td>
-                                <td>{{ $item->soluong }}</td>
+                                <th class="text-center">{{ $item->mamonan }}</th>
+                                <td class="text-left">{{ $item->tenmonan }}</td>
+                                <td class="text-center">{{ $item->giatien }}</td>
+                                <td class="text-center">{{ $item->soluong }}</td>
                             </tr>
                         @endforeach
                     </tbody>

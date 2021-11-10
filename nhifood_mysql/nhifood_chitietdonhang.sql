@@ -30,7 +30,7 @@ CREATE TABLE `chitietdonhang` (
   `giatien` int NOT NULL,
   `soluong` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `chitietdonhang` (
 
 LOCK TABLES `chitietdonhang` WRITE;
 /*!40000 ALTER TABLE `chitietdonhang` DISABLE KEYS */;
-INSERT INTO `chitietdonhang` VALUES (8,12,15,'CHIFFON PHÔ MAI CHẢY',50000,1),(9,12,13,'BÔNG LAN 4 VỊ',39000,5);
+INSERT INTO `chitietdonhang` VALUES (8,12,15,'CHIFFON PHÔ MAI CHẢY',50000,1),(9,12,13,'BÔNG LAN 4 VỊ',39000,5),(10,13,15,'CHIFFON PHÔ MAI CHẢY',50000,2),(11,13,10,' Full xúc xích - Hotdog Hàn Quốc',29000,3),(12,14,15,'CHIFFON PHÔ MAI CHẢY',50000,4);
 /*!40000 ALTER TABLE `chitietdonhang` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-10 18:12:08
+-- Dump completed on 2021-11-10 23:16:47

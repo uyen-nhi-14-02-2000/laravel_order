@@ -5,10 +5,13 @@
         <div id="list-order-placed">
             @include('order.list-order-placed', ['data' => $data])
         </div>
+        <div class="pagination-custom d-flex justify-content-end my-3">
+            @include('common.pagination', ['paginator' => $data])
+        </div>
         <div id="modal-box" class="modal-box">
         </div>
     </div>
-    
+
 
 @endsection
 

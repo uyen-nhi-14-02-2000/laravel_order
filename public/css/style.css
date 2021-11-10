@@ -13,16 +13,16 @@ body.modal-open {
 #menu-page #list-area {
     padding: 20px;
     background: #fff;
-    border-radius: .25rem;
-    box-shadow: 0 0 1px rgba(0,0,0,.125),0 1px 3px rgba(0,0,0,.2);
+    border-radius: 0.25rem;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.125), 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
-#menu-page #modal-box .qty-product input{
+#menu-page #modal-box .qty-product input {
     text-align: center;
     width: 50px;
 }
 
-#menu-page #modal-box .qty-product i{
+#menu-page #modal-box .qty-product i {
     cursor: pointer;
 }
 
@@ -32,12 +32,13 @@ body.modal-open {
     display: flex;
 }*/
 
-#order-page #cart-area, #order-page #customer-area {
+#order-page #cart-area,
+#order-page #customer-area {
     padding: 20px;
     margin: 10px;
     background: #fff;
-    border-radius: .25rem;
-    box-shadow: 0 0 1px rgba(0,0,0,.125),0 1px 3px rgba(0,0,0,.2);
+    border-radius: 0.25rem;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.125), 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 #order-page #cart-area {
@@ -46,15 +47,15 @@ body.modal-open {
 }
 
 #order-page #customer-area {
-    max-height: 380px;
+    max-height: 420px;
 }
 
-#order-page #cart-area .qty-product input{
+#order-page #cart-area .qty-product input {
     text-align: center;
     width: 50px;
 }
 
-#order-page #cart-area .qty-product i{
+#order-page #cart-area .qty-product i {
     cursor: pointer;
 }
 
@@ -76,4 +77,12 @@ body.modal-open {
 
 #order-placed-page #list-order-placed .fa-eye {
     cursor: pointer;
+}
+
+#order-placed-page #list-order-placed {
+    padding: 20px;
+    /* margin: 10px; */
+    background: #fff;
+    border-radius: 0.25rem;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.125), 0 1px 3px rgba(0, 0, 0, 0.2);
 }

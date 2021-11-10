@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `ten` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `sdt` int NOT NULL,
+  `sdt` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -33,8 +33,9 @@ CREATE TABLE `users` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `users_sdt_unique` (`sdt`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +44,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'admin',123456789,'admin@gmail.com',NULL,'$2a$12$E2f6z5YNevs3mKYOD03mReDMXeuWtA8JcYUfH3gy4SbHdCB7mrIj2',NULL,NULL,NULL),(2,'admin2',12345678,'admin2@gmail.com',NULL,'$2a$12$E2f6z5YNevs3mKYOD03mReDMXeuWtA8JcYUfH3gy4SbHdCB7mrIj2',NULL,NULL,NULL);
+INSERT INTO `users` VALUES (1,'Lương Bảo','0355007111','admin@gmail.com',NULL,'$2y$10$RsaV2/p4C0aVeXGqdP3K0OFhCWM.N05lQGxrE3NgfPTnYxi9VEfjG',NULL,'2021-11-10 15:49:16','2021-11-10 15:49:16');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-10 18:12:08
+-- Dump completed on 2021-11-10 23:16:47

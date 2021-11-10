@@ -13,6 +13,12 @@ class OrderController extends Controller
 
     private $cart = null;
     private $data = null;
+    private $pageCustom = null;
+
+    public function __construct()
+    {
+        $this->pageCustom = config('constant')['pageCustom'];
+    }
 
     public function index()
     {
@@ -88,9 +94,28 @@ class OrderController extends Controller
         }
     }
 
-    public function placed()
+    public function placed(Request $request)
     {
-        $dsDonHang = DonHang::orderBy('id', 'desc')->get();
+
+        if ($request->ajax()) {
+            // dd($request->page);
+            if ($request->has('page')) {
+                $this->pageCustom['page'] = $request->page;
+            }
+
+            $dsDonHang = DonHang::where('idkh', '=', auth()->id())->orderBy('id', 'desc')->paginate($this->pageCustom['numberOnPage'], $this->pageCustom['columns'], $this->pageCustom['pageName'], $this->pageCustom['page']);
+
+            $dsDonHang->withPath(route('order.placed'));
+
+            return response()->json([
+                'status' => true,
+                'view' => view('order.list-order-placed', ['data' => $dsDonHang])->render(),
+                'pagination' => view('common.pagination', ['paginator' => $dsDonHang])->render(),
+                'message' => 'Success!'
+            ], 200);
+        }
+
+        $dsDonHang = DonHang::where('idkh', '=', auth()->id())->orderBy('id', 'desc')->paginate($this->pageCustom['numberOnPage'], $this->pageCustom['columns'], $this->pageCustom['pageName'], $this->pageCustom['page']);
         return view('order.order-placed', ['data' => $dsDonHang]);
     }
 

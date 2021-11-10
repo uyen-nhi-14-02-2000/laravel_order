@@ -1,5 +1,5 @@
 @extends('layouts.default')
-@section('title', 'Đặt hàng')
+@section('title', 'Giỏ hàng')
 @section('content')
     <div id="order-page">
         <div class="row">

@@ -1,7 +1,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
-      <a href="index3.html" class="brand-link">
+      <a href="{{ route('menu.index') }}" class="brand-link">
           <img src="{{ asset('adminlte3-1-0/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
               class="brand-image img-circle elevation-3" style="opacity: .8">
           <span class="brand-text font-weight-light">Nhi Food</span>
@@ -9,6 +9,7 @@
 
       <!-- Sidebar -->
       <div class="sidebar">
+
           <!-- Sidebar user panel (optional) -->
           <div class="user-panel mt-3 pb-3 mb-3 d-flex">
               <div class="image">
@@ -17,19 +18,6 @@
               </div>
               <div class="info">
                   <a href="#" class="d-block">{{ auth()->user()->ten }}</a>
-              </div>
-          </div>
-
-          <!-- SidebarSearch Form -->
-          <div class="form-inline">
-              <div class="input-group" data-widget="sidebar-search">
-                  <input class="form-control form-control-sidebar" type="search" placeholder="Search"
-                      aria-label="Search">
-                  <div class="input-group-append">
-                      <button class="btn btn-sidebar">
-                          <i class="fas fa-search fa-fw"></i>
-                      </button>
-                  </div>
               </div>
           </div>
 
@@ -71,33 +59,32 @@
                   <li class="nav-item">
                       <a href="{{ route('menu.index') }}"
                           class="nav-link {{ \Request::route()->getName() == 'menu.index' ? 'active' : '' }}">
-                          <i class="nav-icon fas fa-th"></i>
+                          <i class="fas fa-book-reader"></i>&nbsp;
                           <p>
                               Thực đơn
-                              <span class="right badge badge-danger">New</span>
                           </p>
                       </a>
                   </li>
                   <li class="nav-item">
                       <a href="{{ route('order.index') }}"
                           class="nav-link {{ \Request::route()->getName() == 'order.index' ? 'active' : '' }}">
-                          <i class="nav-icon fas fa-th"></i>
+                          <i class="fas fa-shopping-cart"></i>&nbsp;
                           <p>
                               Giỏ hàng
-                              <span class="right badge badge-danger">New</span>
+                              <span
+                                  class="right badge badge-danger qty-product-in-cart">{{ session('cart.product') != null ? count(session('cart.product')) : 0 }}</span>
                           </p>
                       </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{ route('order.placed') }}"
-                        class="nav-link {{ \Request::route()->getName() == 'order.placed' ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>
-                            Đơn hàng đã đặt
-                            <span class="right badge badge-danger">New</span>
-                        </p>
-                    </a>
-                </li>
+                      <a href="{{ route('order.placed') }}"
+                          class="nav-link {{ \Request::route()->getName() == 'order.placed' ? 'active' : '' }}">
+                          <i class="fas fa-list-ol"></i>&nbsp;
+                          <p>
+                              Đơn hàng đã đặt
+                          </p>
+                      </a>
+                  </li>
               </ul>
           </nav>
           <!-- /.sidebar-menu -->
