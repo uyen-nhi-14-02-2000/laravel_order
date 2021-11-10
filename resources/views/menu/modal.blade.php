@@ -8,10 +8,16 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="img d-flex justify-content-center" style="height: 300px;">
+                <div class="img d-flex justify-content-center my-2" style="height: 300px;">
                     <img src="{{ $data->anh }}" style="height: 100%" alt="">
                 </div>
-                <div class="description">{{ $data->mota }}</div>
+                <div class="infomation m-2">
+                    <div class="category">Thể loại: {{ $data->idtheloai }}</div>
+                    <div class="brand">Thương hiệu: {{ $data->idth }}</div>
+                    <div class="description">Mô tả: {{ $data->mota }}</div>
+                    <div class="description">Giá: {{ $data->gia }}</div>
+                </div>
+
                 <form id="form-product" action="#" method="post">
                     <input type="hidden" name="id-product" value="{{ $data->id }}">
                 </form>
@@ -23,8 +29,7 @@
                     <input name="qty" type="text" class="form-control m-2" value="1">
                     <span><i class="fas fa-plus-circle increase-qty"></i></span>
                 </div>
-                <button type="button" id="add-cart"
-                    class="btn btn-primary">{{ __('Thêm vào giỏ hàng') }}</button>
+                <button type="button" id="add-cart" class="btn btn-primary">{{ __('Thêm vào giỏ hàng') }}</button>
             </div>
         </div>
         <!-- /.modal-content -->

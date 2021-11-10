@@ -33,25 +33,26 @@
 
             if (err.status == 404) {
                 swalAlert(err.data.icon, err.data.title, err.data.message);
-                jQuery.Menu.getDataTable();
+                jQuery.Menu.getData();
             }
         },
 
-        getDataTable: function () {
+        getData: function () {
             data = {};
             izanagi(
-                "dashboard/menus/dataTable",
-                "get",
+                "menu/get-data",
+                "post",
                 data,
                 null,
-                jQuery.Menu.getDataTableCallback,
+                jQuery.Menu.getDataCallback,
                 ""
             );
         },
 
-        getDataTableCallback: function (res) {
+        getDataCallback: function (res) {
             if (res.data.status) {
                 $("#menu-page #list-area").html(res.data.view);
+                $("#menu-page .pagination-custom").html(res.data.pagination);
                 jQuery.Menu.clearSearch();
             }
         },
@@ -63,105 +64,68 @@
             }, object);
         },
 
-        submitData: function (data, url, method) {
-            izanagi(
-                // "dashboard/menus/store",
-                // "post",
-                url,
-                method,
-                data,
-                null,
-                jQuery.Menu.submitDataCallback,
-                jQuery.Menu.submitDataCallbackError
-            );
-        },
+        // submitData: function (data, url, method) {
+        //     izanagi(
+        //         // "dashboard/menus/store",
+        //         // "post",
+        //         url,
+        //         method,
+        //         data,
+        //         null,
+        //         jQuery.Menu.submitDataCallback,
+        //         jQuery.Menu.submitDataCallbackError
+        //     );
+        // },
 
-        submitDataCallback: function (res) {
-            if (res.data.status) {
-                $("#menu-page #modal-form").modal("hide");
-                $("#menu-page #list-area").html(res.data.view);
-                if (res.data.clear_search) {
-                    jQuery.Menu.clearSearch();
-                }
-            }
-        },
+        // submitDataCallback: function (res) {
+        //     if (res.data.status) {
+        //         $("#menu-page #modal-form").modal("hide");
+        //         $("#menu-page #list-area").html(res.data.view);
+        //         $("#menu-page .pagination-custom").html(res.data.pagination);
+        //         if (res.data.clear_search) {
+        //             jQuery.Menu.clearSearch();
+        //         }
+        //     }
+        // },
 
-        submitDataCallbackError: function (err) {
-            // console.log(error.status);
-            if (err.status == 422) {
-                jQuery.Menu.validateError(err.data.errors);
-            } else if (err.status == 404) {
-                $("#menu-page #modal-form").modal("hide");
-                swalAlert(err.data.icon, err.data.title, err.data.message);
-                jQuery.Menu.getDataTable();
-            }
-        },
+        // submitDataCallbackError: function (err) {
+        //     // console.log(error.status);
+        //     if (err.status == 422) {
+        //         jQuery.Menu.validateError(err.data.errors);
+        //     } else if (err.status == 404) {
+        //         $("#menu-page #modal-form").modal("hide");
+        //         swalAlert(err.data.icon, err.data.title, err.data.message);
+        //         jQuery.Menu.getData();
+        //     }
+        // },
 
-        validateError: function (err) {
-            $("#menu-page #modal-box .error-mes").remove();
-            $("#menu-page #modal-box .is-invalid").removeClass("is-invalid");
-            $.each(err, function (key, value) {
-                $("#menu-page #modal-box  #" + key).addClass("is-invalid");
+        // validateError: function (err) {
+        //     $("#menu-page #modal-box .error-mes").remove();
+        //     $("#menu-page #modal-box .is-invalid").removeClass("is-invalid");
+        //     $.each(err, function (key, value) {
+        //         $("#menu-page #modal-box  #" + key).addClass("is-invalid");
 
-                $("#menu-page #modal-box  #" + key)
-                    .parent()
-                    .append(
-                        "<span class='text-danger error-mes'>" +
-                        value +
-                        "</span>"
-                    );
-            });
-        },
+        //         $("#menu-page #modal-box  #" + key)
+        //             .parent()
+        //             .append(
+        //                 "<span class='text-danger error-mes'>" +
+        //                 value +
+        //                 "</span>"
+        //             );
+        //     });
+        // },
 
         clearSearch: function () {
-            $("input[name='kName']").val("");
-            $("#statusSearch").val("");
-            $("#statusSearch").trigger("change");
-        },
-
-        deleteConfirm: function (data) {
-            // console.log(data);
-            swalAlertConfirm(
-                "warning",
-                "Are you sure?",
-                "You won't be able to revert this!",
-                "Delete",
-                "#6e7d88",
-                "#ff0000",
-                jQuery.Menu.deleteItems,
-                data
-            );
-        },
-        deleteItems: function (data) {
-            // console.log(data);
-            izanagi(
-                "dashboard/menus/delete",
-                "delete",
-                null,
-                data,
-                jQuery.Menu.deleteItemsCallback,
-                jQuery.Menu.deleteItemsCallbackError
-            );
-        },
-        deleteItemsCallback: function (res) {
-            if (res.data.status) {
-                $("#menu-page #list-area").html(res.data.view);
-                jQuery.Menu.clearSearch();
-            }
-        },
-
-        deleteItemsCallbackError: function (err) {
-            // console.log(err);
-            if (err.status == 404 || err.status == 500) {
-                $("#menu-page #modal-form").modal("hide");
-                swalAlert(err.data.icon, err.data.title, err.data.message);
-                jQuery.Menu.getDataTable();
-            }
+            $("input[name='nameSearch']").val("");
+            $("#categorySearch").val("");
+            $("#categorySearch").trigger("change");
+            $("#brandSearch").val("");
+            $("#brandSearch").trigger("change");
         },
 
         searchData: function (
             data = {},
-            url = "dashboard/menus/search",
+            url = "menu/search",
             method = "post"
         ) {
             izanagi(
@@ -178,8 +142,7 @@
             if (res.data.status) {
                 // $("#menu-page #search-area").html(res.data.view_search);
                 $("#menu-page #list-area").html(res.data.view);
-                // $("#menu-page #modal-form").modal("show");
-                // console.log($("#menu-page .pagination-custom"));
+                $("#menu-page .pagination-custom").html(res.data.pagination);
             }
         },
         searchDataCallbackError: function (err) {
@@ -187,7 +150,7 @@
 
             if (err.status == 404) {
                 swalAlert(err.data.icon, err.data.title, err.data.message);
-                jQuery.Menu.getDataTable();
+                jQuery.Menu.getData();
             }
         },
 
@@ -206,6 +169,43 @@
             );
         },
 
+        addCartCallback: function (res) {
+            if(res.data.status) {
+                swalAlert(res.data.icon, res.data.title, res.data.message);
+                jQuery.Menu.getCart();
+            }
+        },
+
+        addCartCallbackError: function (err) {
+            console.log(err);
+
+            if (err.status == 404) {
+                swalAlert(err.data.icon, err.data.title, err.data.message);
+                jQuery.Menu.getData();
+            }
+        },
+
+        removeCart: function (
+            data = {},
+            url = "cart/remove",
+            method = "get"
+        ) {
+            izanagi(
+                url,
+                method,
+                data,
+                null,
+                jQuery.Menu.removeCartCallback
+            );
+        },
+
+        removeCartCallback: function (res) {
+            if(res.data.status) {
+                swalAlert(res.data.icon, res.data.title, res.data.message);
+                jQuery.Menu.getCart();
+            }
+        },
+
         getCart: function (
             data = {},
             url = "cart",
@@ -221,35 +221,20 @@
             );
         },
 
-        addCartCallback: function (res) {
-            if(res.data.status) {
-                swalAlert(res.data.icon, res.data.title, res.data.message);
-                jQuery.Menu.getCart();
-            }
-        },
-
-        addCartCallbackError: function (err) {
-            console.log(err);
-
-            if (err.status == 404) {
-                swalAlert(err.data.icon, err.data.title, err.data.message);
-                jQuery.Menu.getDataTable();
-            }
-        },
-
         getCartCallback: function (res) {
             if (res.data.status) {
                 let myCart = $(".my-cart");
                 let listProductInCart = $(".list-product-in-cart");
                 let qtyProduct = $(".qty-product-in-cart");
 
-                qtyProduct.html(Object.keys(res.data.cart.product).length);
+                // console.log(res.data);
+                qtyProduct.html(Object.keys(res.data.cart).length);
 
                 let html = '';
-                $.each(res.data.cart.product, function (key, value) {
+                $.each(res.data.cart, function (key, value) {
                     // alert(value.tenmon);
                     html += `
-                        <a href="#" class="dropdown-item cart-item">
+                        <a href="#" class="dropdown-item cart-item" data-id="` + value.id + `">
                             <!-- Message Start -->
                             <div class="media">
                                 <img src="` + value.anh + `"
@@ -276,21 +261,27 @@ $("document").ready(function () {
         let $layoutSearch = $("#menu-page #search-area");
         let $layoutList = $("#menu-page #list-area");
         let $modalBox = $("#menu-page #modal-box");
+        let $myCart = $(".my-cart");
+        let $pagination = $("#menu-page .pagination-custom");
 
+
+        //clear search form
         $layoutSearch.on("click", ".button-clear", function () {
             jQuery.Menu.clearSearch();
             data = jQuery.Menu.getParams($("#form-search"));
             jQuery.Menu.searchData(data);
         });
 
+        //button search form
         $layoutSearch.on("click", ".button-search", function () {
             // e.preventDefault();
             data = jQuery.Menu.getParams($("#form-search"));
-            // let url = "dashboard/menus/search";
-            // let method = "post";
-            jQuery.Menu.searchData(data);
+            let url = "menu/search";
+            let method = "post";
+            jQuery.Menu.searchData(data, url, method);
         });
 
+        //open modal product when click image product
         $layoutList.on("click", ".product-detail", function () {
             let data = {};
             let id = $(this).parent().parent().attr("data-key");
@@ -302,6 +293,7 @@ $("document").ready(function () {
             jQuery.Menu.showModal(data, url, method);
         });
 
+        //open modal product use button order
         $layoutList.on("click", ".btn-order", function () {
             let data = {};
             let id = $(this).parent().parent().parent().attr("data-key");
@@ -315,6 +307,8 @@ $("document").ready(function () {
 
 
         //Modal box
+
+        //Increase quantity
         $modalBox.on("click", ".increase-qty", function () {
             let qty = $(this).parent().siblings("input").val();
             if ($.isNumeric(qty)) {
@@ -324,6 +318,7 @@ $("document").ready(function () {
             }
         });
 
+        //Decrease quantity
         $modalBox.on("click", ".decrease-qty", function () {
             let qty = $(this).parent().siblings("input").val();
             if ($.isNumeric(qty) && parseInt(qty) > 1) {
@@ -333,6 +328,7 @@ $("document").ready(function () {
             }
         });
 
+        //Check input quantity
         $modalBox.on("keyup", "input[name='qty']", function () {
             let qty = $(this).val();
             if (!$.isNumeric(qty) || parseInt(qty) < 1) {
@@ -341,6 +337,7 @@ $("document").ready(function () {
             }
         });
 
+        //Add product to cart
         $modalBox.on("click", "#add-cart", function () {
             let qty = $(this).siblings(".qty-product").children("input").val();
             let id = $("input[name='id-product']").val();
@@ -350,6 +347,32 @@ $("document").ready(function () {
             let method = "post";
             $("#menu-page #modal-form").modal("toggle");
             jQuery.Menu.addCart(data, url, method);
+        });
+
+        //Remove product in cart
+        $myCart.on("click", ".cart-item", function() {
+
+            let id = $(this).data('id');
+            let data = { id: id, isDelAll: false };
+
+            let url = "cart/remove";
+            let method = "post";
+            // $("#menu-page #modal-form").modal("toggle");
+            jQuery.Menu.removeCart(data, url, method);
+        });
+
+        //Pagination
+        $pagination.on("click", ".page-link", function (e) {
+            e.preventDefault();
+            let liActive = $(this).parent().hasClass("active");
+            let page = Number($(this).attr("data-page")) || false;
+            if (page == false || liActive == true) {
+                return;
+            }
+            data = jQuery.Menu.getParams($("#form-search"), {
+                page: page,
+            });
+            jQuery.Menu.searchData(data);
         });
 
     } catch (e) {

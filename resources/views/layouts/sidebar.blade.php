@@ -79,14 +79,25 @@
                       </a>
                   </li>
                   <li class="nav-item">
-                      <a href="{{ route('menu.index') }}" class="nav-link">
+                      <a href="{{ route('order.index') }}"
+                          class="nav-link {{ \Request::route()->getName() == 'order.index' ? 'active' : '' }}">
                           <i class="nav-icon fas fa-th"></i>
                           <p>
-                              Thanh toán
+                              Giỏ hàng
                               <span class="right badge badge-danger">New</span>
                           </p>
                       </a>
                   </li>
+                  <li class="nav-item">
+                    <a href="{{ route('order.placed') }}"
+                        class="nav-link {{ \Request::route()->getName() == 'order.placed' ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Đơn hàng đã đặt
+                            <span class="right badge badge-danger">New</span>
+                        </p>
+                    </a>
+                </li>
               </ul>
           </nav>
           <!-- /.sidebar-menu -->

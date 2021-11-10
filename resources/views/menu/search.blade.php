@@ -12,23 +12,31 @@
     <div class="card-body">
         <form id="form-search" action="">
             <div class="row d-flex justify-content-between align-items-center">
-                <div class="form-group col-md-6 row my-0">
-                    <label for="nameSearch" class="col-md-3 col-form-label">{{ __('Name category') }}</label>
+                <div class="form-group col-md-4 row my-0">
+                    <label for="nameSearch" class="col-md-3 col-form-label">{{ __('Tên món ăn') }}</label>
                     <div class="col-md-9">
-                        <input type="text" value="" class="form-control" id="nameSearch" name="kName">
+                        <input type="text" value="" class="form-control" id="nameSearch" name="nameSearch">
                     </div>
                 </div>
-                <div class="form-group col-md-6 row my-0">
-                    <label for="statusSearch" class="col-md-2 col-form-label">{{ __('Status') }}</label>
+                <div class="form-group col-md-4 row my-0">
+                    <label for="categorySearch" class="col-md-2 col-form-label">{{ __('Thể loại') }}</label>
                     <div class="col-md-10">
-                        <select name="kStatus" id="statusSearch" class="form-control">
-                            <option value="">{{ __('All') }}</option>
-                            {{-- <option value="1">{{ __('Active') }}</option>
-                            <option value="0">{{ __('Disable') }}</option> --}}
-                            {{-- @foreach (array_reverse(config('constant.status')) as $status)
-                                <option value="{{ $status['value'] }}">
-                                    {{ __($status['text']) }}</option>
-                            @endforeach --}}
+                        <select name="categorySearch" id="categorySearch" class="form-control">
+                            <option value="">{{ __('Tất cả') }}</option>
+                            @foreach ($dsTheLoai as $item)
+                                <option value="{{ $item->id }}"> {{ $item->ten }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-md-4 row my-0">
+                    <label for="brandSearch" class="col-md-3 col-form-label">{{ __('Thương hiệu') }}</label>
+                    <div class="col-md-9">
+                        <select name="brandSearch" id="brandSearch" class="form-control">
+                            <option value="">{{ __('Tất cả') }}</option>
+                            @foreach ($dsThuongHieu as $item)
+                                <option value="{{ $item->id }}"> {{ $item->ten }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>

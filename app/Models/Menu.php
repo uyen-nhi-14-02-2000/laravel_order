@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -12,15 +13,20 @@ class Menu extends Model
     protected $table = 'menu';
 
     protected $searchField = [
-        'kName' => [
+        'nameSearch' => [
             'value' => null,
             'compare' => 'like',
-            'nameDB' => 'name',
+            'nameDB' => 'tenmon',
         ],
-        'kStatus' => [
+        'categorySearch' => [
             'value' => null,
             'compare' => '=',
-            'nameDB' => 'status',
+            'nameDB' => 'idtheloai',
+        ],
+        'brandSearch' => [
+            'value' => null,
+            'compare' => '=',
+            'nameDB' => 'idth',
         ],
     ];
 
@@ -29,7 +35,6 @@ class Menu extends Model
         $query = Menu::query();
 
         foreach ($this->searchField as $field => $data) {
-            // dd($data['value']);
             if ($data['value'] != null && $data['value'] != '') {
                 if ($data['compare'] == 'like') {
                     $query->where($data['nameDB'], $data['compare'], '%' . $data['value'] . '%');
@@ -44,5 +49,15 @@ class Menu extends Model
         }
 
         return $query->paginate($pageCustom['numberOnPage'], $pageCustom['columns'], $pageCustom['pageName'], $pageCustom['page']);
+    }
+
+    public function loadDataSearch(Request $request)
+    {
+
+        foreach ($this->searchField as $field => $data) {
+            if ($request->has($field)) {
+                $this->searchField[$field]['value'] = $request->$field;
+            }
+        }
     }
 }

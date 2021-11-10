@@ -89,27 +89,36 @@
                 <li class="nav-item dropdown my-cart">
                     <a class="nav-link" data-toggle="dropdown" href="#">
                         <i class="fas fa-shopping-bag"></i>
-                        <span class="badge badge-danger navbar-badge qty-product-in-cart">0</span>
+                        <span
+                            class="badge badge-danger navbar-badge qty-product-in-cart">{{ session('cart.product') != null ? count(session('cart.product')) : 0 }}</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right list-product-in-cart">
-                        <a href="#" class="dropdown-item cart-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="https://beptruong.edu.vn/wp-content/uploads/2014/06/bun-ca-ha-noi.jpg"
-                                    alt="Image product" class="img-size-50 mr-3 img-circle">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title text-wrap">
-                                        Bún mắm
-                                    </h3>
-                                    {{-- <span class="float-right text-muted text-sm"><i class="fas fa-trash-alt"></i></span> --}}
-                                    <p class="text-sm">Số lượng: 1</p>
-                                    <p class="text-sm text-muted"><i class="fas fa-dollar-sign"></i> Giá: 59000 VND</p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        
+                        @if (session('cart.product') != null)
+                            @foreach (session('cart.product') as $key => $item)
+
+                                <a href="#" class="dropdown-item cart-item" data-id={{ $item['id'] }}>
+                                    <!-- Message Start -->
+                                    <div class="media">
+                                        <img src="{{ $item['anh'] }}" alt="Image product"
+                                            class="img-size-50 mr-3 img-circle">
+                                        <div class="media-body">
+                                            <h3 class="dropdown-item-title text-wrap">
+                                                {{ $item['tenmon'] }}
+                                            </h3>
+                                            <p class="text-sm">Số lượng: {{ $item['qty'] }}</p>
+                                            <p class="text-sm text-muted"><i class="fas fa-dollar-sign"></i> Giá:
+                                                {{ $item['gia'] }} VND
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <!-- Message End -->
+                                </a>
+                                <div class="dropdown-divider"></div>
+                            @endforeach
+                        @endif
+
+
+
                         <a href="#" class="dropdown-item dropdown-footer">Tới trang thanh toán</a>
                     </div>
                 </li>

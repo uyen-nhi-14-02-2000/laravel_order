@@ -6,11 +6,74 @@ body.modal-open {
     cursor: pointer;
 }
 
+/* :is(#menu-page #list-area)::-webkit-scrollbar{
+    width: 0px;
+}*/
+
+#menu-page #list-area {
+    padding: 20px;
+    background: #fff;
+    border-radius: .25rem;
+    box-shadow: 0 0 1px rgba(0,0,0,.125),0 1px 3px rgba(0,0,0,.2);
+}
+
 #menu-page #modal-box .qty-product input{
     text-align: center;
     width: 50px;
 }
 
 #menu-page #modal-box .qty-product i{
+    cursor: pointer;
+}
+
+/* Order-page */
+
+/* #order-page {
+    display: flex;
+}*/
+
+#order-page #cart-area, #order-page #customer-area {
+    padding: 20px;
+    margin: 10px;
+    background: #fff;
+    border-radius: .25rem;
+    box-shadow: 0 0 1px rgba(0,0,0,.125),0 1px 3px rgba(0,0,0,.2);
+}
+
+#order-page #cart-area {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+#order-page #customer-area {
+    max-height: 380px;
+}
+
+#order-page #cart-area .qty-product input{
+    text-align: center;
+    width: 50px;
+}
+
+#order-page #cart-area .qty-product i{
+    cursor: pointer;
+}
+
+#order-page .flex-wrap {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+#order-page #cart-area .remove-item-cart {
+    cursor: pointer;
+}
+
+.h-100per {
+    height: 100%;
+}
+
+/* order-place */
+
+#order-placed-page #list-order-placed .fa-eye {
     cursor: pointer;
 }
