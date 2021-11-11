@@ -45,7 +45,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/placed-detail', 'OrderController@placedDetail')->name('order');
     });
 
-    Route::prefix('admin')->name('admin.')->group(function () {
+    Route::prefix('admin')->name('admin.')->middleware('can:check-user-is-admin')->group(function () {
         Route::get('/', 'AdminController@index')->name('index');
         Route::get('/order-placed', 'OrderController@placed')->name('order-placed');
         Route::get('/products/', 'AdminController@product')->name('product.index');

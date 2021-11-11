@@ -27,6 +27,6 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('check-user-is-admin', 'App\Policies\AdminPolicy@checkIsAdmin');
     }
 }

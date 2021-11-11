@@ -18,7 +18,7 @@ class AdminPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return false;
     }
 
     /**
@@ -92,7 +92,8 @@ class AdminPolicy
         //
     }
 
-    public function checkIsAdmin(User $user, User $model) {
-        return $user->isAdmin($model) ? Response::allow() : Response::deny('You do not own this post.');
+    public function checkIsAdmin(User $user)
+    {
+        return auth()->user()->chuc_vu === 1 ? Response::allow() : Response::deny('Trang này dành cho Admin! Bạn không có quyền truy cập!');
     }
 }
