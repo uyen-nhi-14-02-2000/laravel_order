@@ -1,5 +1,5 @@
 @extends('layouts.default')
-@section('title', 'Đơn hàng đã đặt')
+@section('title',  \Request::route()->getName() == 'admin.order-placed' ? 'Danh sách đơn hàng' : 'Đơn hàng đã đặt')
 @section('content')
     <div id="order-placed-page">
         <div id="list-order-placed">

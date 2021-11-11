@@ -27,35 +27,6 @@
                   data-accordion="false">
                   <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-                  {{-- <li class="nav-item menu-open">
-                      <a href="#" class="nav-link active">
-                          <i class="nav-icon fas fa-tachometer-alt"></i>
-                          <p>
-                              Dashboard
-                              <i class="right fas fa-angle-left"></i>
-                          </p>
-                      </a>
-                      <ul class="nav nav-treeview">
-                          <li class="nav-item">
-                              <a href="./index.html" class="nav-link active">
-                                  <i class="far fa-circle nav-icon"></i>
-                                  <p>Dashboard v1</p>
-                              </a>
-                          </li>
-                          <li class="nav-item">
-                              <a href="./index2.html" class="nav-link">
-                                  <i class="far fa-circle nav-icon"></i>
-                                  <p>Dashboard v2</p>
-                              </a>
-                          </li>
-                          <li class="nav-item">
-                              <a href="./index3.html" class="nav-link">
-                                  <i class="far fa-circle nav-icon"></i>
-                                  <p>Dashboard v3</p>
-                              </a>
-                          </li>
-                      </ul>
-                  </li> --}}
                   <li class="nav-item">
                       <a href="{{ route('menu.index') }}"
                           class="nav-link {{ \Request::route()->getName() == 'menu.index' ? 'active' : '' }}">
@@ -81,9 +52,38 @@
                           class="nav-link {{ \Request::route()->getName() == 'order.placed' ? 'active' : '' }}">
                           <i class="fas fa-list-ol"></i>&nbsp;
                           <p>
-                              Đơn hàng đã đặt
+                              Đơn hàng của bạn
                           </p>
                       </a>
+                  </li>
+                  <li class="nav-item {{ in_array(\Request::route()->getName(), ['admin.index', 'admin.order-placed', 'admin.product.index']) ? 'menu-open' : '' }}">
+                      <a href="#" class="nav-link {{ in_array(\Request::route()->getName(), ['admin.index', 'admin.order-placed', 'admin.product.index']) ? 'active' : '' }}">
+                          <i class="nav-icon fas fa-tachometer-alt"></i>
+                          <p>
+                              Trang Admin
+                              <i class="right fas fa-angle-left"></i>
+                          </p>
+                      </a>
+                      <ul class="nav nav-treeview">
+                          <li class="nav-item">
+                              <a href="{{ route('admin.index') }}" class="nav-link {{ \Request::route()->getName() == 'admin.index' ? 'active' : '' }}">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Thống kê</p>
+                              </a>
+                          </li>
+                          <li class="nav-item">
+                              <a href="{{ route('admin.order-placed') }}" class="nav-link {{ \Request::route()->getName() == 'admin.order-placed' ? 'active' : '' }}">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Danh sách đơn hàng</p>
+                              </a>
+                          </li>
+                          <li class="nav-item">
+                              <a href="{{ route('admin.product.index') }}" class="nav-link {{ \Request::route()->getName() == 'admin.product.index' ? 'active' : '' }}">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Danh sách món ăn</p>
+                              </a>
+                          </li>
+                      </ul>
                   </li>
               </ul>
           </nav>

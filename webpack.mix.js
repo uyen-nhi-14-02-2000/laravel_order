@@ -24,4 +24,5 @@ mix.copyDirectory("resources/js/sweetalert2.js", "public/js/sweetalert2.js");
 mix.copyDirectory("resources/js/menu.js", "public/js/menu.js");
 mix.copyDirectory("resources/js/order.js", "public/js/order.js");
 mix.copyDirectory("resources/js/order-placed.js", "public/js/order-placed.js");
+mix.copyDirectory("resources/js/product-admin.js", "public/js/product-admin.js");
 // mix.copyDirectory("resources/adminlte3-1-0", "public/adminlte3-1-0");

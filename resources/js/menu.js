@@ -64,57 +64,6 @@
             }, object);
         },
 
-        // submitData: function (data, url, method) {
-        //     izanagi(
-        //         // "dashboard/menus/store",
-        //         // "post",
-        //         url,
-        //         method,
-        //         data,
-        //         null,
-        //         jQuery.Menu.submitDataCallback,
-        //         jQuery.Menu.submitDataCallbackError
-        //     );
-        // },
-
-        // submitDataCallback: function (res) {
-        //     if (res.data.status) {
-        //         $("#menu-page #modal-form").modal("hide");
-        //         $("#menu-page #list-area").html(res.data.view);
-        //         $("#menu-page .pagination-custom").html(res.data.pagination);
-        //         if (res.data.clear_search) {
-        //             jQuery.Menu.clearSearch();
-        //         }
-        //     }
-        // },
-
-        // submitDataCallbackError: function (err) {
-        //     // console.log(error.status);
-        //     if (err.status == 422) {
-        //         jQuery.Menu.validateError(err.data.errors);
-        //     } else if (err.status == 404) {
-        //         $("#menu-page #modal-form").modal("hide");
-        //         swalAlert(err.data.icon, err.data.title, err.data.message);
-        //         jQuery.Menu.getData();
-        //     }
-        // },
-
-        // validateError: function (err) {
-        //     $("#menu-page #modal-box .error-mes").remove();
-        //     $("#menu-page #modal-box .is-invalid").removeClass("is-invalid");
-        //     $.each(err, function (key, value) {
-        //         $("#menu-page #modal-box  #" + key).addClass("is-invalid");
-
-        //         $("#menu-page #modal-box  #" + key)
-        //             .parent()
-        //             .append(
-        //                 "<span class='text-danger error-mes'>" +
-        //                 value +
-        //                 "</span>"
-        //             );
-        //     });
-        // },
-
         clearSearch: function () {
             $("input[name='nameSearch']").val("");
             $("#categorySearch").val("");
@@ -164,7 +113,7 @@
         addCartCallback: function (res) {
             if (res.data.status) {
                 swalAlert(res.data.icon, res.data.title, res.data.message);
-                jQuery.Menu.getCart();
+                getCart();
             }
         },
 
@@ -184,70 +133,7 @@
         removeCartCallback: function (res) {
             if (res.data.status) {
                 swalAlert(res.data.icon, res.data.title, res.data.message);
-                jQuery.Menu.getCart();
-            }
-        },
-
-        getCart: function (data = {}, url = "cart", method = "get") {
-            izanagi(
-                url,
-                method,
-                data,
-                null,
-                jQuery.Menu.getCartCallback
-                // jQuery.Menu.showModalCallbackError
-            );
-        },
-
-        getCartCallback: function (res) {
-            if (res.data.status) {
-                let myCart = $(".my-cart");
-                let listProductInCart = $(".list-product-in-cart");
-                let qtyProduct = $(".qty-product-in-cart");
-
-                let protocol = window.location.protocol;
-                let hostname = window.location.hostname;
-
-                let url = protocol + "//" + hostname + "/order";
-
-                // console.log(res.data);
-                qtyProduct.html(Object.keys(res.data.cart).length);
-
-                let html = "";
-                $.each(res.data.cart, function (key, value) {
-                    // alert(value.tenmon);
-                    html +=
-                        `
-                        <a href="#" class="dropdown-item cart-item" data-id="` +
-                        value.id +
-                        `">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="` +
-                        value.anh +
-                        `"
-                                    alt="Image product" class="img-size-50 mr-3 img-circle">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title text-wrap">` +
-                        value.tenmon +
-                        `</h3>
-                                    <p class="text-sm">Số lượng: ` +
-                        value.qty +
-                        `</p>
-                                    <p class="text-sm text-muted"><i class="fas fa-dollar-sign"></i> Giá: ` +
-                        value.gia +
-                        ` VND</p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>`;
-                });
-                html +=
-                    `<a href="` +
-                    url +
-                    `" class="dropdown-item dropdown-footer">Tới trang giỏ hàng</a>`;
-                listProductInCart.html(html);
+                getCart();
             }
         },
     });
@@ -333,7 +219,7 @@ $("document").ready(function () {
         $modalBox.on("keyup", "input[name='qty']", function () {
             let qty = $(this).val();
             if (!$.isNumeric(qty) || parseInt(qty) < 1) {
-                alert("Vui lòng nhập số!");
+                swalAlert("error", "Lỗi", "Vui lòng nhập số");
                 $(this).val(1);
             }
         });

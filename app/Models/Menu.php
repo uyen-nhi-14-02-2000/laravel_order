@@ -12,6 +12,8 @@ class Menu extends Model
 
     protected $table = 'menu';
 
+    protected $fillable = ['tenmon', 'mota', 'anh', 'gia', 'idtheloai', 'idth'];
+
     protected $searchField = [
         'nameSearch' => [
             'value' => null,
@@ -59,5 +61,13 @@ class Menu extends Model
                 $this->searchField[$field]['value'] = $request->$field;
             }
         }
+    }
+
+    public function getTheLoai() {
+        return $this->belongsTo(TheLoai::class, 'idtheloai', 'id');
+    }
+
+    public function getThuongHieu() {
+        return $this->belongsTo(ThuongHieu::class, 'idth', 'id');
     }
 }

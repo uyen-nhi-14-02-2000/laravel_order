@@ -143,7 +143,7 @@
         updateCartCallback: function (res) {
             if (res.data.status) {
                 // swalAlert(res.data.icon, res.data.title, res.data.message);
-                jQuery.Order.getCart();
+                getCart();
             }
         },
 
@@ -163,71 +163,8 @@
         removeCartCallback: function (res) {
             if (res.data.status) {
                 swalAlert(res.data.icon, res.data.title, res.data.message);
-                jQuery.Order.getCart();
+                getCart();
                 jQuery.Order.getData();
-            }
-        },
-
-        getCart: function (data = {}, url = "cart", method = "get") {
-            izanagi(
-                url,
-                method,
-                data,
-                null,
-                jQuery.Order.getCartCallback
-                // jQuery.Order.showModalCallbackError
-            );
-        },
-
-        getCartCallback: function (res) {
-            if (res.data.status) {
-                let myCart = $(".my-cart");
-                let listProductInCart = $(".list-product-in-cart");
-                let qtyProduct = $(".qty-product-in-cart");
-
-                let protocol = window.location.protocol;
-                let hostname = window.location.hostname;
-
-                let url = protocol + "//" + hostname + "/order";
-
-                // console.log(res.data);
-                qtyProduct.html(Object.keys(res.data.cart).length);
-
-                let html = "";
-                $.each(res.data.cart, function (key, value) {
-                    // alert(value.tenmon);
-                    html +=
-                        `
-                        <a href="#" class="dropdown-item cart-item" data-id="` +
-                        value.id +
-                        `">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="` +
-                        value.anh +
-                        `"
-                                    alt="Image product" class="img-size-50 mr-3 img-circle">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title text-wrap">` +
-                        value.tenmon +
-                        `</h3>
-                                    <p class="text-sm">Số lượng: ` +
-                        value.qty +
-                        `</p>
-                                    <p class="text-sm text-muted"><i class="fas fa-dollar-sign"></i> Giá: ` +
-                        value.gia +
-                        ` VND</p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>`;
-                });
-                html +=
-                    `<a href="` +
-                    url +
-                    `" class="dropdown-item dropdown-footer">Tới trang giỏ hàng</a>`;
-                listProductInCart.html(html);
             }
         },
     });
@@ -285,7 +222,7 @@ $("document").ready(function () {
         $cartArea.on("keyup", "input[name='qty']", function () {
             let qty = $(this).val();
             if (!$.isNumeric(qty) || parseInt(qty) < 1) {
-                alert("Vui lòng nhập số!");
+                swalAlert("error", "Lỗi", "Vui lòng nhập số");
                 $(this).val(1);
             }
 
@@ -295,7 +232,7 @@ $("document").ready(function () {
             jQuery.Order.updateCart(data);
         });
 
-        //Remove product in cart
+        //Xóa món ăn ở giỏ hàng trong trang giỏ hàng
         $cartArea.on("click", ".remove-item-cart", function () {
             let id = $(this).parent().parent().parent().data("id");
             let data = { id: id, isDelAll: false };
@@ -305,7 +242,7 @@ $("document").ready(function () {
             jQuery.Order.removeCart(data, url, method);
         });
 
-        //Remove product in cart
+        //Xóa món ăn ở giỏ hàng ở góc trên cùng bên phải
         $myCart.on("click", ".cart-item", function () {
             let id = $(this).data("id");
             let data = { id: id, isDelAll: false };
@@ -316,6 +253,7 @@ $("document").ready(function () {
             jQuery.Order.removeCart(data, url, method);
         });
 
+        //Click vào button đặt hàng
         $customerArea.on("click", "button", function (e) {
             e.preventDefault();
             let qtyProduct = $(".qty-product-in-cart").text();

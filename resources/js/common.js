@@ -84,7 +84,8 @@ function swalAlertConfirm(
     colorButtonCancel,
     colorButtonConfirm,
     _functionSubmit,
-    data
+    data,
+    cancelBtn = 'Cancel',
 ) {
     Swal.fire({
         title: title,
@@ -94,6 +95,7 @@ function swalAlertConfirm(
         confirmButtonColor: colorButtonConfirm,
         cancelButtonColor: colorButtonCancel,
         confirmButtonText: confirmBtn,
+        cancelButtonText: cancelBtn,
     }).then((result) => {
         if (result.isConfirmed) {
             // _functionSubmit(data);
@@ -102,4 +104,66 @@ function swalAlertConfirm(
             }
         }
     });
+}
+
+function getCart (data = {}, url = "cart", method = "get") {
+    izanagi(
+        url,
+        method,
+        data,
+        null,
+        getCartCallback
+    );
+}
+
+function getCartCallback (res) {
+    if (res.data.status) {
+        let myCart = $(".my-cart");
+        let listProductInCart = $(".list-product-in-cart");
+        let qtyProduct = $(".qty-product-in-cart");
+
+        let protocol = window.location.protocol;
+        let hostname = window.location.hostname;
+
+        let url = protocol + "//" + hostname + "/order";
+
+        // console.log(res.data);
+        qtyProduct.html(Object.keys(res.data.cart).length);
+
+        let html = "";
+        $.each(res.data.cart, function (key, value) {
+            // alert(value.tenmon);
+            html +=
+                `
+                <a href="#" class="dropdown-item cart-item" data-id="` +
+                value.id +
+                `">
+                    <!-- Message Start -->
+                    <div class="media">
+                        <img src="` +
+                value.anh +
+                `"
+                            alt="Image product" class="img-size-50 mr-3 img-circle">
+                        <div class="media-body">
+                            <h3 class="dropdown-item-title text-wrap">` +
+                value.tenmon +
+                `</h3>
+                            <p class="text-sm">Số lượng: ` +
+                value.qty +
+                `</p>
+                            <p class="text-sm text-muted"><i class="fas fa-dollar-sign"></i> Giá: ` +
+                value.gia +
+                ` VND</p>
+                        </div>
+                    </div>
+                    <!-- Message End -->
+                </a>
+                <div class="dropdown-divider"></div>`;
+        });
+        html +=
+            `<a href="` +
+            url +
+            `" class="dropdown-item dropdown-footer">Tới trang giỏ hàng</a>`;
+        listProductInCart.html(html);
+    }
 }

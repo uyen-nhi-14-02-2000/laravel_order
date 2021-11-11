@@ -66,105 +66,8 @@
         removeCartCallback: function (res) {
             if (res.data.status) {
                 swalAlert(res.data.icon, res.data.title, res.data.message);
-                jQuery.OrderPlaced.getCart();
+                getCart();
                 jQuery.OrderPlaced.getData();
-            }
-        },
-
-        getCart: function (data = {}, url = "cart", method = "get") {
-            izanagi(
-                url,
-                method,
-                data,
-                null,
-                jQuery.OrderPlaced.getCartCallback
-                // jQuery.OrderPlaced.showModalCallbackError
-            );
-        },
-
-        getCartCallback: function (res) {
-            if (res.data.status) {
-                let myCart = $(".my-cart");
-                let listProductInCart = $(".list-product-in-cart");
-                let qtyProduct = $(".qty-product-in-cart");
-
-                let protocol = window.location.protocol;
-                let hostname = window.location.hostname;
-
-                let url = protocol + "//" + hostname + "/order";
-
-                // console.log(res.data);
-                qtyProduct.html(Object.keys(res.data.cart).length);
-
-                let html = "";
-                $.each(res.data.cart, function (key, value) {
-                    // alert(value.tenmon);
-                    html +=
-                        `
-                        <a href="#" class="dropdown-item cart-item" data-id="` +
-                        value.id +
-                        `">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="` +
-                        value.anh +
-                        `"
-                                    alt="Image product" class="img-size-50 mr-3 img-circle">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title text-wrap">` +
-                        value.tenmon +
-                        `</h3>
-                                    <p class="text-sm">Số lượng: ` +
-                        value.qty +
-                        `</p>
-                                    <p class="text-sm text-muted"><i class="fas fa-dollar-sign"></i> Giá: ` +
-                        value.gia +
-                        ` VND</p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>`;
-                });
-                html +=
-                    `<a href="` +
-                    url +
-                    `" class="dropdown-item dropdown-footer">Tới trang giỏ hàng</a>`;
-                listProductInCart.html(html);
-            }
-        },
-
-        getDataWithPag: function (
-            data = {},
-            url = "order/placed",
-            method = "get"
-        ) {
-            izanagi(
-                url,
-                method,
-                data,
-                null,
-                jQuery.OrderPlaced.getDataWithPagCallback,
-                jQuery.OrderPlaced.getDataWithPagCallbackError
-            );
-        },
-
-        getDataWithPagCallback: function (res) {
-            if (res.data.status) {
-                console.log(res);
-                // $("#menu-page #search-area").html(res.data.view_search);
-                $("#order-placed-page #list-order-placed").html(res.data.view);
-                $("#order-placed-page .pagination-custom").html(
-                    res.data.pagination
-                );
-            }
-        },
-        getDataWithPagCallbackError: function (err) {
-            console.log(err);
-
-            if (err.status == 404) {
-                swalAlert(err.data.icon, err.data.title, err.data.message);
-                // jQuery.Menu.getData();
             }
         },
     });
@@ -187,6 +90,7 @@ $("document").ready(function () {
             jQuery.OrderPlaced.removeCart(data, url, method);
         });
 
+        //Hiển thị chi tiết đơn hàng
         $listOrderPlaced.on("click", ".fa-eye", function () {
             let id = $(this).parent().parent().data("id");
 
@@ -204,7 +108,6 @@ $("document").ready(function () {
             if (page == false || liActive == true) {
                 return;
             }
-            // console.log(page);
             let data = {};
             let url = "order/placed?page=" + page;
             let method = "get";

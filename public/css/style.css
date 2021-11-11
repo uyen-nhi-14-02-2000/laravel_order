@@ -86,3 +86,21 @@ body.modal-open {
     border-radius: 0.25rem;
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.125), 0 1px 3px rgba(0, 0, 0, 0.2);
 }
+
+/* Admin page */
+
+#product-admin-page #product-area {
+    padding: 20px;
+    /* margin: 10px; */
+    background: #fff;
+    border-radius: 0.25rem;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.125), 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+#product-admin-page #product-area .btn-add-product {
+    margin-bottom: 10px;
+}
+
+.fa-eye, .fa-edit, .fa-trash-alt{
+    cursor: pointer;
+}

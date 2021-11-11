@@ -16,7 +16,7 @@ return [
 
     'number_element_on_page' => '1',
     'pageCustom' => [
-        'numberOnPage' => '5',
+        'numberOnPage' => '8',
         'columns' => ['*'],
         'pageName' => 'page',
         'page' => '1',
