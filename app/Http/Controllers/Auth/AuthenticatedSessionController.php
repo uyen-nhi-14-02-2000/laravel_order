@@ -32,6 +32,9 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        if(auth()->user()->chuc_vu == 1) {
+            return redirect()->intended(RouteServiceProvider::ADMIN_HOME);
+        }
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 

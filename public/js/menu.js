@@ -218,7 +218,7 @@ $("document").ready(function () {
         //Check input quantity
         $modalBox.on("keyup", "input[name='qty']", function () {
             let qty = $(this).val();
-            if (!$.isNumeric(qty) || parseInt(qty) < 1) {
+            if (qty != '' && (!$.isNumeric(qty) || parseInt(qty) < 1)) {
                 swalAlert("error", "Lỗi", "Vui lòng nhập số");
                 $(this).val(1);
             }
