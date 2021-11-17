@@ -35,8 +35,6 @@ class AdminController extends Controller
     }
     public function index(Request $request, User $user)
     {
-        $user = $user->find(1);
-        $this->authorize('update', User::class);
         $totalUser = $this->user->count();
         $totalProduct = $this->menu->count();
         // $listOrderPlaced = $this->donHang->all();
@@ -55,10 +53,6 @@ class AdminController extends Controller
 
     public function orderPlaced(Request $request)
     {
-        $user = new User();
-        $user = $user->find(1);
-        dd($user->isAdmin());
-        $this->authorize('checkIsAdmin', $user);
         if ($request->ajax()) {
             // dd($request->page);
             if ($request->has('page')) {
