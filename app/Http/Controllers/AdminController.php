@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProductRequest;
 use App\Models\Menu;
 use App\Models\User;
 use App\Models\DonHang;
 use App\Models\TheLoai;
 use App\Models\ThuongHieu;
 use Illuminate\Http\Request;
+use App\Http\Requests\AddProductRequest;
+use App\Http\Requests\EditProductRequest;
 
 class AdminController extends Controller
 {
@@ -164,7 +165,7 @@ class AdminController extends Controller
         return abort(404);
     }
 
-    public function store(ProductRequest $request)
+    public function store(AddProductRequest $request)
     {
 
         $domain = $request->root();
@@ -227,7 +228,7 @@ class AdminController extends Controller
         return abort(404);
     }
 
-    public function update(ProductRequest $request, $id)
+    public function update(EditProductRequest $request, $id)
     {
         try {
 

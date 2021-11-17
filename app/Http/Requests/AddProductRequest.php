@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProductRequest extends FormRequest
+class AddProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class ProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'tenmon' => 'required|unique:menu,tenmon,' . $this->id,
+            'tenmon' => 'required|unique:menu,tenmon',
             'mota' => 'required|string|max:255',
             'gia' => 'required|numeric',
             'idtheloai' => 'required|numeric',
