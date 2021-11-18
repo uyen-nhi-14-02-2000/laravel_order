@@ -36,7 +36,7 @@ class AdminController extends Controller
 
         $this->pageCustom = config('constant')['pageCustom'];
     }
-    public function index(Request $request, User $user)
+    public function index()
     {
         $totalUser = $this->user->count();
         $totalProduct = $this->menu->count();
