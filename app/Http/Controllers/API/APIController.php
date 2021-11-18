@@ -4,10 +4,13 @@ namespace App\Http\Controllers\API;
 
 use App\Models\Menu;
 use App\Models\User;
+use App\Models\TheLoai;
 use App\Models\ThuongHieu;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules;
 use App\Http\Controllers\Controller;
-use App\Models\TheLoai;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Events\Registered;
 
 class APIController extends Controller
 {
@@ -86,5 +89,32 @@ class APIController extends Controller
     {
         $this->data = $model->all();
         return response()->json($this->data);
+    }
+
+    public function register(Request $request)
+    {
+        try {
+            $request->validate([
+                'ten' => ['required', 'string', 'max:255'],
+                'sdt' => ['required', 'numeric', 'unique:users,sdt'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
+                'pass' => ['required', Rules\Password::defaults()],
+            ]);
+    
+            $user = User::create([
+                'sdt' => $request->sdt,
+                'ten' => $request->ten,
+                'email' => $request->email,
+                'password' => Hash::make($request->pass),
+                'password_text' => $request->pass,        ]);
+    
+            event(new Registered($user));
+            if($user) {
+                return 'success';
+            }
+            return 'error';
+        } catch (\Exception $th) {
+            return 'error';
+        }
     }
 }

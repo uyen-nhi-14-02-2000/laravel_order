@@ -19,6 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::name('api.')->group(function() {
+    Route::post('/register', 'APIController@register')->name('register');
     Route::post('/login', 'APIController@login')->name('login');
     Route::get('/thuong-hieu', 'APIController@thuongHieu')->name('thuonghieu');
     Route::get('/menu', 'APIController@menu')->name('menu');
