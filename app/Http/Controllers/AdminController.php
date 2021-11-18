@@ -23,6 +23,8 @@ class AdminController extends Controller
     private $thuongHieu = null;
     private $sort = ['id' => 'desc'];
 
+    private $folderImageProduct = 'image-product';
+
     public function __construct(User $user, Menu $menu, DonHang $donHang, TheLoai $theLoai, ThuongHieu $thuongHieu)
     {
         $this->user = $user;
@@ -173,11 +175,12 @@ class AdminController extends Controller
 
         $fileName = uniqid() . '_' . $request->file('anh')->getClientOriginalName();
 
-        $this->menu->anh = $domain . '/upload/' . $fileName;
+        $this->menu->anh = $domain . '/storage/' . $this->folderImageProduct . '/' . $fileName;
         $rs = $this->menu->save();
         if ($rs) {
 
-            $request->file('anh')->move('upload', $fileName);
+            // $request->file('anh')->move('upload', $fileName);
+            $request->file('anh')->storeAs('public/' . $this->folderImageProduct, $fileName);
 
             $this->data = $this->menu->search($this->pageCustom, $this->sort);
 
@@ -253,7 +256,7 @@ class AdminController extends Controller
             $data = [
                 'tenmon' => $request->tenmon,
                 'mota' => $request->mota,
-                'anh' => $domain . '/upload/' . $fileName,
+                'anh' => $domain . '/storage/' . $this->folderImageProduct . '/' . $fileName,
                 'gia' => $request->gia,
                 'idtheloai' => $request->idtheloai,
                 'idth' => $request->idth,
@@ -263,13 +266,16 @@ class AdminController extends Controller
 
             $this->data->update($data);
 
-            $filePathOld = public_path() . '/upload/' . $fileNameOld;
+            $filePathOld = storage_path('app/public/' . $this->folderImageProduct). '/' . $fileNameOld;
+
+            // dd($filePathOld);
 
             if (file_exists($filePathOld)) {
                 unlink($filePathOld);
             }
 
-            $request->file('anh')->move('upload', $fileName);
+            //Lưu vào storage/app/public/image-product/
+            $request->file('anh')->storeAs('public/' . $this->folderImageProduct, $fileName);
 
             $this->data = $this->menu->search($this->pageCustom, $this->sort);
 
