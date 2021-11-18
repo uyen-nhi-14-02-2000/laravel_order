@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\ThuongHieu;
 
 class APIController extends Controller
 {
@@ -37,5 +38,10 @@ class APIController extends Controller
         } catch (\Throwable $th) {
             return 'error';
         }
+    }
+
+    public function thuongHieu(ThuongHieu $thuongHieu) {
+        $this->data = $thuongHieu->all();
+        return response()->json($this->data);
     }
 }
