@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\ThuongHieu;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\TheLoai;
 
 class APIController extends Controller
 {
@@ -65,5 +66,25 @@ class APIController extends Controller
                 'message' => 'Error!',
             ], 500);
         }
+    }
+    public function getTH(Request $request, Menu $model)
+    {
+
+        try {
+            $idTH = $request->idth;
+
+            $this->data = $model->where('idth', '=', $idTH)->get();
+            return response()->json($this->data);
+        } catch (\Exception $th) {
+            return response()->json([
+                'message' => 'Error!',
+            ], 500);
+        }
+    }
+
+    public function theLoai(TheLoai $model)
+    {
+        $this->data = $model->all();
+        return response()->json($this->data);
     }
 }

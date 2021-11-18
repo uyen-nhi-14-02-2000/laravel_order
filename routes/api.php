@@ -23,4 +23,6 @@ Route::name('api.')->group(function() {
     Route::get('/thuong-hieu', 'APIController@thuongHieu')->name('thuonghieu');
     Route::get('/menu', 'APIController@menu')->name('menu');
     Route::post('/get-menu', 'APIController@getMenu')->name('getMenu');
+    Route::post('/get-th', 'APIController@getTH')->name('getTH');
+    Route::get('/the-loai', 'APIController@theLoai')->name('theloai');
 });
