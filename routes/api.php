@@ -26,4 +26,6 @@ Route::name('api.')->group(function() {
     Route::post('/get-menu', 'APIController@getMenu')->name('getMenu');
     Route::post('/get-th', 'APIController@getTH')->name('getTH');
     Route::get('/the-loai', 'APIController@theLoai')->name('theloai');
+    Route::post('/them-don-hang', 'APIController@themDonHang')->name('themDonHang');
+    Route::post('/them-chi-tiet-don-hang', 'APIController@themChiTietDonHang')->name('themChiTietDonHang');
 });
