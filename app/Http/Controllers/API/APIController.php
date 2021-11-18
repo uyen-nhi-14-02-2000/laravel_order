@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Models\Menu;
 use App\Models\User;
+use App\Models\ThuongHieu;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\ThuongHieu;
 
 class APIController extends Controller
 {
@@ -29,19 +30,40 @@ class APIController extends Controller
                 ['password_text', '=', $pass],
             ])->first();
 
-            if($user == null) {
+            if ($user == null) {
                 return 'error';
             }
 
             return $user->sdt;
-
         } catch (\Throwable $th) {
             return 'error';
         }
     }
 
-    public function thuongHieu(ThuongHieu $thuongHieu) {
-        $this->data = $thuongHieu->all();
+    public function thuongHieu(ThuongHieu $model)
+    {
+        $this->data = $model->all();
         return response()->json($this->data);
+    }
+
+    public function menu(Menu $model)
+    {
+        $this->data = $model->all();
+        return response()->json($this->data);
+    }
+
+    public function getMenu(Request $request, Menu $model)
+    {
+
+        try {
+            $idTheLoai = $request->idtheloai;
+
+            $this->data = $model->where('idtheloai', '=', $idTheLoai)->get();
+            return response()->json($this->data);
+        } catch (\Exception $th) {
+            return response()->json([
+                'message' => 'Error!',
+            ], 500);
+        }
     }
 }

@@ -21,4 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::name('api.')->group(function() {
     Route::post('/login', 'APIController@login')->name('login');
     Route::get('/thuonghieu', 'APIController@thuongHieu')->name('thuonghieu');
+    Route::get('/menu', 'APIController@menu')->name('menu');
+    Route::post('/get-menu', 'APIController@getMenu')->name('getMenu');
 });
