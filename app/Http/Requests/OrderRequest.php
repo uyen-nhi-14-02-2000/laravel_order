@@ -28,4 +28,22 @@ class OrderRequest extends FormRequest
             'diachi' => 'required|string'
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'required' => ':attribute không được để trống!',
+            'string' => ':attribute phải là kiểu chuỗi!',
+            'min' => ':attribute phải có ít nhất :min ký tự!',
+            'max' => ':attribute có tối đa :max ký tự!',
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'ten' => 'Tên món ăn',
+            'diachi' => 'Mô tả',
+        ];
+    }
 }

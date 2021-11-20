@@ -19,8 +19,8 @@
                     </div>
                 </div>
                 <div class="form-group col-md-4 row my-0">
-                    <label for="categorySearch" class="col-md-2 col-form-label">{{ __('Thể loại') }}</label>
-                    <div class="col-md-10">
+                    <label for="categorySearch" class="col-md-3 col-form-label">{{ __('Thể loại') }}</label>
+                    <div class="col-md-9">
                         <select name="categorySearch" id="categorySearch" class="form-control">
                             <option value="">{{ __('Tất cả') }}</option>
                             @foreach ($dsTheLoai as $item)
@@ -30,8 +30,8 @@
                     </div>
                 </div>
                 <div class="form-group col-md-4 row my-0">
-                    <label for="brandSearch" class="col-md-3 col-form-label">{{ __('Thương hiệu') }}</label>
-                    <div class="col-md-9">
+                    <label for="brandSearch" class="col-md-4 col-form-label">{{ __('Thương hiệu') }}</label>
+                    <div class="col-md-8">
                         <select name="brandSearch" id="brandSearch" class="form-control">
                             <option value="">{{ __('Tất cả') }}</option>
                             @foreach ($dsThuongHieu as $item)
