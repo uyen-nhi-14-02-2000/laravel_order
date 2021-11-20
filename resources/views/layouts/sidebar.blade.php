@@ -56,39 +56,7 @@
                           </p>
                       </a>
                   </li>
-<<<<<<< HEAD
                   @can('check-is-admin', Model::class)
-                  <li class="nav-item {{ in_array(\Request::route()->getName(), ['admin.index', 'admin.order-placed', 'admin.product.index']) ? 'menu-open' : '' }}">
-                    <a href="#" class="nav-link {{ in_array(\Request::route()->getName(), ['admin.index', 'admin.order-placed', 'admin.product.index']) ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>
-                            Trang Admin
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('admin.index') }}" class="nav-link {{ \Request::route()->getName() == 'admin.index' ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Thống kê</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('admin.order-placed') }}" class="nav-link {{ \Request::route()->getName() == 'admin.order-placed' ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Danh sách đơn hàng</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('admin.product.index') }}" class="nav-link {{ \Request::route()->getName() == 'admin.product.index' ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Danh sách món ăn</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-=======
-                  @can('check-user-is-admin')
                       <li
                           class="nav-item {{ in_array(\Request::route()->getName(), ['admin.index', 'admin.order-placed', 'admin.product.index']) ? 'menu-open' : '' }}">
                           <a href="#"
@@ -123,7 +91,6 @@
                               </li>
                           </ul>
                       </li>
->>>>>>> 274f033c5d832f30f1d64839e2d7ee7b17e750bf
                   @endcan
               </ul>
           </nav>

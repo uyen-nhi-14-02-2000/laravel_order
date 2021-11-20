@@ -169,18 +169,10 @@ class AdminController extends Controller
 
     public function store(AddProductRequest $request)
     {
-
-        $domain = $request->root();
         $this->menu->fill($request->all());
-
-        $fileName = uniqid() . '_' . $request->file('anh')->getClientOriginalName();
-
-        $this->menu->anh = $domain . '/storage/' . $this->folderImageProduct . '/' . $fileName;
         $rs = $this->menu->save();
-        if ($rs) {
 
-            // $request->file('anh')->move('upload', $fileName);
-            $request->file('anh')->storeAs('public/' . $this->folderImageProduct, $fileName);
+        if ($rs) {
 
             $this->data = $this->menu->search($this->pageCustom, $this->sort);
 
@@ -245,18 +237,10 @@ class AdminController extends Controller
                 ], 404);
             }
 
-            $imgLinkOld = $this->data->anh;
-            $arrTemp = explode("/", $imgLinkOld);
-            $fileNameOld = end($arrTemp);
-
-            $domain = $request->root();
-
-            $fileName = uniqid() . '_' . $request->file('anh')->getClientOriginalName();
-
             $data = [
                 'tenmon' => $request->tenmon,
                 'mota' => $request->mota,
-                'anh' => $domain . '/storage/' . $this->folderImageProduct . '/' . $fileName,
+                'anh' => $request->anh,
                 'gia' => $request->gia,
                 'idtheloai' => $request->idtheloai,
                 'idth' => $request->idth,
@@ -265,17 +249,6 @@ class AdminController extends Controller
 
 
             $this->data->update($data);
-
-            $filePathOld = storage_path('app/public/' . $this->folderImageProduct). '/' . $fileNameOld;
-
-            // dd($filePathOld);
-
-            if (file_exists($filePathOld)) {
-                unlink($filePathOld);
-            }
-
-            //Lưu vào storage/app/public/image-product/
-            $request->file('anh')->storeAs('public/' . $this->folderImageProduct, $fileName);
 
             $this->data = $this->menu->search($this->pageCustom, $this->sort);
 

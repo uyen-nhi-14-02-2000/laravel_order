@@ -29,7 +29,7 @@ class AddProductRequest extends FormRequest
             'gia' => 'required|numeric',
             'idtheloai' => 'required|numeric',
             'idth' => 'required|numeric',
-            'anh' => 'required|image|mimes:jpge,png,jpg|mimetypes:image/jpeg,image/png|max:2048',
+            'anh' => 'required|string',
         ];
     }
 
