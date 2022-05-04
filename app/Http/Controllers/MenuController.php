@@ -30,14 +30,23 @@ class MenuController extends Controller
     public function index(Request $request)
     {
 
+        //Ds thuong hieu
         $dsThuongHieu = $this->thuongHieu->all();
+
+        //Ds the loai
         $dsTheLoai = $this->theLoai->all();
 
         $this->data = $this->model->search($this->pageCustom, $this->sort);
-        return view('menu.index', ['data' => $this->data, 'dsThuongHieu' => $dsThuongHieu, 'dsTheLoai' => $dsTheLoai]);
+
+        return view('menu.index', [
+            'data' => $this->data,
+            'dsThuongHieu' => $dsThuongHieu,
+            'dsTheLoai' => $dsTheLoai
+        ]);
     }
 
-    public function getData(Request $request) {
+    public function getData(Request $request)
+    {
         if ($request->ajax()) {
 
             $this->data = $this->model->search($this->pageCustom, $this->sort);

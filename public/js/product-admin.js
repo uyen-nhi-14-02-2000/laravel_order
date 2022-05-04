@@ -1,5 +1,5 @@
 (function ($) {
-    let ProductAdmin = function () { };
+    let ProductAdmin = function () {};
     jQuery.ProductAdmin = new ProductAdmin();
     jQuery.extend(ProductAdmin.prototype, {
         showModal: function (
@@ -52,7 +52,9 @@
         getDataCallback: function (res) {
             if (res.data.status) {
                 $("#product-admin-page #list-area").html(res.data.view);
-                $("#product-admin-page .pagination-custom").html(res.data.pagination);
+                $("#product-admin-page .pagination-custom").html(
+                    res.data.pagination
+                );
                 jQuery.ProductAdmin.clearSearch();
             }
         },
@@ -79,7 +81,9 @@
             if (res.data.status) {
                 $("#product-admin-page #modal-form").modal("hide");
                 $("#product-admin-page #product-area").html(res.data.view);
-                $("#product-admin-page .pagination-custom").html(res.data.pagination);
+                $("#product-admin-page .pagination-custom").html(
+                    res.data.pagination
+                );
                 if (res.data.clear_search) {
                     jQuery.ProductAdmin.clearSearch();
                 }
@@ -99,16 +103,20 @@
 
         validateError: function (err) {
             $("#product-admin-page #modal-box .error-mes").remove();
-            $("#product-admin-page #modal-box .is-invalid").removeClass("is-invalid");
+            $("#product-admin-page #modal-box .is-invalid").removeClass(
+                "is-invalid"
+            );
             $.each(err, function (key, value) {
-                $("#product-admin-page #modal-box  #" + key).addClass("is-invalid");
+                $("#product-admin-page #modal-box  #" + key).addClass(
+                    "is-invalid"
+                );
 
                 $("#product-admin-page #modal-box  #" + key)
                     .parent()
                     .append(
                         "<span class='text-danger error-mes'>" +
-                        value +
-                        "</span>"
+                            value +
+                            "</span>"
                     );
             });
         },
@@ -121,7 +129,11 @@
             $("#brandSearch").trigger("change");
         },
 
-        searchData: function (data = {}, url = "admin/products/search", method = "post") {
+        searchData: function (
+            data = {},
+            url = "admin/products/search",
+            method = "post"
+        ) {
             izanagi(
                 url,
                 method,
@@ -136,7 +148,9 @@
             if (res.data.status) {
                 // $("#product-admin-page #search-area").html(res.data.view_search);
                 $("#product-admin-page #product-area").html(res.data.view);
-                $("#product-admin-page .pagination-custom").html(res.data.pagination);
+                $("#product-admin-page .pagination-custom").html(
+                    res.data.pagination
+                );
             }
         },
         searchDataCallbackError: function (err) {
@@ -176,7 +190,13 @@
         },
 
         removeCart: function (data = {}, url = "cart/remove", method = "get") {
-            izanagi(url, method, data, null, jQuery.ProductAdmin.removeCartCallback);
+            izanagi(
+                url,
+                method,
+                data,
+                null,
+                jQuery.ProductAdmin.removeCartCallback
+            );
         },
 
         removeCartCallback: function (res) {
@@ -269,7 +289,7 @@ $("document").ready(function () {
         //Check input quantity
         $modalBox.on("keyup", "input[name='gia']", function () {
             let qty = $(this).val();
-            if (qty != '' && (!$.isNumeric(qty) || parseInt(qty) < 1)) {
+            if (qty != "" && (!$.isNumeric(qty) || parseInt(qty) < 1)) {
                 swalAlert("error", "Lỗi", "Vui lòng nhập số");
                 $(this).val(1);
             }
@@ -286,7 +306,6 @@ $("document").ready(function () {
 
         //Click vào button Lưu thông tin khi thêm món ăn
         $modalBox.on("click", "#btn-store-product", function () {
-
             let formData = new FormData($("#form-add")[0]);
             let url = "admin/products/store";
             let method = "post";
@@ -295,7 +314,6 @@ $("document").ready(function () {
 
         //Click vào button cập nhật món ăn
         $layoutList.on("click", ".product-edit", function () {
-
             let id = $(this).parent().parent().attr("data-id");
             if (id == null || id == "" || id == "undefined") {
                 return;

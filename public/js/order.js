@@ -51,8 +51,9 @@
                 }).then(function () {
                     var protocol = window.location.protocol;
                     var hostname = window.location.hostname;
+                    var port = "8000";
                     window.location =
-                        protocol + "//" + hostname + "/order/placed";
+                        protocol + "//" + hostname + ":" + port + "/order/placed";
                 });
             } else {
                 swalAlert(res.data.icon, res.data.title, res.data.message);

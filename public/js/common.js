@@ -25,9 +25,10 @@ axios.interceptors.request.use(
 function izanagi(_action, _method, _data, _params, _callback, _callbackError) {
     var protocol = window.location.protocol;
     var hostname = window.location.hostname;
+    var port = "8000";
 
     var options = {
-        baseURL: protocol + "//" + hostname + "/",
+        baseURL: protocol + "//" + hostname + ":" + port + "/",
         url: _action,
         method: _method,
     };
@@ -124,8 +125,9 @@ function getCartCallback (res) {
 
         let protocol = window.location.protocol;
         let hostname = window.location.hostname;
+        var port = "8000";
 
-        let url = protocol + "//" + hostname + "/order";
+        let url = protocol + "//" + hostname + ":" + port + "/order";
 
         // console.log(res.data);
         qtyProduct.html(Object.keys(res.data.cart).length);

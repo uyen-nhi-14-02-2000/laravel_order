@@ -66,6 +66,7 @@ class OrderController extends Controller
 
             $donHang = DonHang::create($data);
 
+            //Neu tao thanh cong don hang thi tao tiep chi tiet don hang
             if ($donHang) {
                 foreach ($this->cart as $cart) {
                     $chiTietDonHang[] = new ChiTietDonHang([
@@ -81,6 +82,7 @@ class OrderController extends Controller
 
             DB::commit();
 
+            //Xoa gio hang
             $request->session()->forget('cart.product');
 
             return response()->json([

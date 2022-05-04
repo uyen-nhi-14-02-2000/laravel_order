@@ -24,7 +24,9 @@ Route::get('/link-storage', function () {
 });
 
 Route::middleware(['auth'])->group(function () {
+    
     Route::redirect('/dashboard', '/menu')->name('home');
+
     Route::prefix('menu')->name('menu.')->group(function () {
         Route::get('/', 'MenuController@index')->name('index');
         Route::post('/search', 'MenuController@search')->name('search');

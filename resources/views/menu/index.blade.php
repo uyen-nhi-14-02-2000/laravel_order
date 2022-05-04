@@ -3,7 +3,10 @@
 @section('content')
     <div id="menu-page">
         <div id="search-area" class="" style=" padding-top: 10px">
-            @include('menu.search', ['search' => $search = null])
+            @include('menu.search', [
+            'dsThuongHieu' => $dsThuongHieu,
+            'dsTheLoai' => $dsTheLoai
+            ])
         </div>
         <div id="list-area">
             @include('menu.data', ['data' => $data])
