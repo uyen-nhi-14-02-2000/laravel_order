@@ -12,7 +12,7 @@ class MenuController extends Controller
 {
     private $model = null;
     private $data = null;
-    private $sort = ['id' => 'desc'];
+    private $sort = ['id' => 'asc'];
     private $pageCustom = null;
 
     private $theLoai = null;
