@@ -21,7 +21,7 @@ class AdminController extends Controller
     private $data = null;
     private $theLoai = null;
     private $thuongHieu = null;
-    private $sort = ['id' => 'desc'];
+    private $sort = ['id' => 'asc'];
 
     private $folderImageProduct = 'image-product';
 
@@ -62,7 +62,7 @@ class AdminController extends Controller
                 $this->pageCustom['page'] = $request->page;
             }
 
-            $dsDonHang = DonHang::orderBy('id', 'desc')->paginate($this->pageCustom['numberOnPage'], $this->pageCustom['columns'], $this->pageCustom['pageName'], $this->pageCustom['page']);
+            $dsDonHang = DonHang::orderBy('id', 'asc')->paginate($this->pageCustom['numberOnPage'], $this->pageCustom['columns'], $this->pageCustom['pageName'], $this->pageCustom['page']);
 
             $dsDonHang->withPath(route('order.placed'));
 
@@ -74,7 +74,7 @@ class AdminController extends Controller
             ], 200);
         }
 
-        $dsDonHang = DonHang::orderBy('id', 'desc')->paginate($this->pageCustom['numberOnPage'], $this->pageCustom['columns'], $this->pageCustom['pageName'], $this->pageCustom['page']);
+        $dsDonHang = DonHang::orderBy('id', 'asc')->paginate($this->pageCustom['numberOnPage'], $this->pageCustom['columns'], $this->pageCustom['pageName'], $this->pageCustom['page']);
         return view('admin.order-placed', ['data' => $dsDonHang]);
     }
 

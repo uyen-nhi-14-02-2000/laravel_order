@@ -106,9 +106,9 @@ class OrderController extends Controller
             }
 
             if (auth()->user()->chuc_vu == 1 && $request->route()->getName() == 'admin.order-placed') {
-                $dsDonHang = DonHang::orderBy('id', 'desc')->paginate($this->pageCustom['numberOnPage'], $this->pageCustom['columns'], $this->pageCustom['pageName'], $this->pageCustom['page']);
+                $dsDonHang = DonHang::orderBy('id', 'asc')->paginate($this->pageCustom['numberOnPage'], $this->pageCustom['columns'], $this->pageCustom['pageName'], $this->pageCustom['page']);
             } else {
-                $dsDonHang = DonHang::where('idkh', '=', auth()->id())->orderBy('id', 'desc')->paginate($this->pageCustom['numberOnPage'], $this->pageCustom['columns'], $this->pageCustom['pageName'], $this->pageCustom['page']);
+                $dsDonHang = DonHang::where('idkh', '=', auth()->id())->orderBy('id', 'asc')->paginate($this->pageCustom['numberOnPage'], $this->pageCustom['columns'], $this->pageCustom['pageName'], $this->pageCustom['page']);
             }
 
             $dsDonHang->withPath(route('order.placed'));
@@ -123,9 +123,9 @@ class OrderController extends Controller
 
         //chuc_vu == 1 là admin, load tất cả đơn hàng
         if (auth()->user()->chuc_vu == 1 && $request->route()->getName() == 'admin.order-placed') {
-            $dsDonHang = DonHang::orderBy('id', 'desc')->paginate($this->pageCustom['numberOnPage'], $this->pageCustom['columns'], $this->pageCustom['pageName'], $this->pageCustom['page']);
+            $dsDonHang = DonHang::orderBy('id', 'asc')->paginate($this->pageCustom['numberOnPage'], $this->pageCustom['columns'], $this->pageCustom['pageName'], $this->pageCustom['page']);
         } else {
-            $dsDonHang = DonHang::where('idkh', '=', auth()->id())->orderBy('id', 'desc')->paginate($this->pageCustom['numberOnPage'], $this->pageCustom['columns'], $this->pageCustom['pageName'], $this->pageCustom['page']);
+            $dsDonHang = DonHang::where('idkh', '=', auth()->id())->orderBy('id', 'asc')->paginate($this->pageCustom['numberOnPage'], $this->pageCustom['columns'], $this->pageCustom['pageName'], $this->pageCustom['page']);
         }
         return view('order.order-placed', ['data' => $dsDonHang]);
     }
